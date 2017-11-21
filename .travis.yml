@@ -1,6 +1,8 @@
 language: c
 
-install: apt-get install doxygen
+before_install:
+    - sudo apt-get update -qq
+    - sudo apt-get install -qq doxygen
 
 script: make docs
 
