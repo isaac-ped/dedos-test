@@ -1,4 +1,7 @@
 language: c
+
+install: apt-get install doxygen
+
 script: make docs
 
 deploy:
