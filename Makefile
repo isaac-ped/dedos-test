@@ -31,7 +31,7 @@ coverage: $(COVERAGE)
 
 docs:
 	doxygen Doxyfile
-	cd html && python -m SimpleHTTPServer
+	mv html docs
 
 runtime-%::
 	make -f $(patsubst %-$*, %.mk, $@) $*
