@@ -2,10 +2,9 @@ language: c
 
 before_install:
     - sudo apt-get update -qq
-    - sudo apt-get install -qq doxygen check libssl-dev libpcre3-dev libgmp-dev socat haproxy mariadb-server cmake
-    - wget https://dev.mysql.com/get/Downloads/Connector-C/mysql-connector-c-6.1.11-src.tar.gz && tar xzf mysql-connector-c-6.1.11-src.tar.gz && cd mysql-connector-c-6.1.11-src/ && cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr/local/share/mysql && make && sudo make install
+    - sudo apt-get install -qq doxygen check libssl-dev libpcre3-dev libgmp-dev socat haproxy lcov
 
-script: make docs && make cov
+script: make docs && make runtime-cov
 
 deploy:
     provider: pages

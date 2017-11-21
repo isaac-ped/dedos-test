@@ -167,7 +167,7 @@ $(subst Test_,, $(patsubst $(TST_BLD_DIR)%, $(OBJ_DIR)%.o, $1)) \
 endef
 
 TEST_CFLAGS= $(CFLAGS) $(CC_EXTRAFLAGS) -I$(TST_DIR) -O0 -lcheck_pic 
-ifeq ($(MAKECMDGOALS),$(filter $(MAKECMDGOALS),coverage init_cov cov-site))
+ifeq ($(MAKECMDGOALS),$(filter $(MAKECMDGOALS),coverage init_cov cov-site cov))
   CFLAGS+= -fprofile-arcs -ftest-coverage --coverage
   OPTIM=0
   INIT_COV=init_cov
@@ -191,6 +191,9 @@ legacy: $(LEG_OBJ)
 depends: $(DEP_DIRS) ${DEP_SRC}
 
 coverage: $(DIRS) $(OBJECTS) $(COV_INIT_INFOS)  test $(TST_COV) $(COV_INFOS)
+
+cov: coverage
+	genhtml --show-details -o $(COV_DIR) $(foreach SRC_D, $(SRC_DIRS),$(wildcard $(COV_DIR)$(subst $(SRC_DIR),,$(SRC_D))*.info) ) $(wildcard $(COV_DIR)*.info)
 
 cov-site: coverage
 	genhtml --show-details -o $(COV_DIR) $(shell find $(COV_DIR) -name '*.info' ! -empty)
