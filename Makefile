@@ -25,6 +25,9 @@ clean: $(CLEANS)
 # A version of make test which runs only unit tests, not integration tests
 unit: $(UNITS)
 
+cov: $(COVERAGE)
+	genhtml --show-details --keep-descriptions -o $(COV_DIR) $(shell find $(COV_DIR) -name '*.info' ! -empty)
+
 coverage: $(COVERAGE)
 	genhtml --show-details --keep-descriptions -o $(COV_DIR) $(shell find $(COV_DIR) -name '*.info' ! -empty)
 	cd $(COV_DIR) && python2 -m SimpleHTTPServer 8081
