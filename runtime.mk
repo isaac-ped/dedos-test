@@ -193,7 +193,8 @@ depends: $(DEP_DIRS) ${DEP_SRC}
 coverage: $(DIRS) $(OBJECTS) $(COV_INIT_INFOS)  test $(TST_COV) $(COV_INFOS)
 
 cov: coverage
-	genhtml --show-details -o $(COV_DIR) $(foreach SRC_D, $(SRC_DIRS),$(wildcard $(COV_DIR)$(subst $(SRC_DIR),,$(SRC_D))*.info) ) $(wildcard $(COV_DIR)*.info)
+	genhtml --show-details -o $(COV_DIR) $(shell find $(COV_DIR) -name '*.info' ! -empty)
+	mv $(COV_DIR) coverage
 
 cov-site: coverage
 	genhtml --show-details -o $(COV_DIR) $(shell find $(COV_DIR) -name '*.info' ! -empty)
@@ -216,7 +217,7 @@ $(COV_DIR)%.info: $(TST_BLD_DIR)%/ test-results
 	else \
 		lcov --external -a $(subst .info,.raw_info,$@) -o $(subst .info,.all_info,$@) --test-name $(notdir $(subst .info,,$@)); \
 	fi
-	-lcov --remove $(subst .info,.all_info,$@) 'test/*' '/usr/*' 'src/legacy/*' -o $@  --test-name $(notdir $(subst .info,,$@))
+	-lcov --remove $(subst .info,.all_info,$@) '/test/*' '/usr/*' 'src/legacy/*' -o $@  --test-name $(notdir $(subst .info,,$@))
 
 $(LEG_OBJ): $(LEG_BLD_DIR)
 	@echo ___________ $< ___________
