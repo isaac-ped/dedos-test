@@ -1,0 +1,71 @@
+\hypertarget{model_8h}{\section{src/msus/ndlog/model.h File Reference}
+\label{model_8h}\index{src/msus/ndlog/model.\-h@{src/msus/ndlog/model.\-h}}
+}
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$deque$>$}\\*
+{\ttfamily \#include \char`\"{}value/all\-Value.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$openssl/sha.\-h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute}
+\item 
+struct \hyperlink{structndlog__tuple}{ndlog\-\_\-tuple}
+\item 
+struct \hyperlink{structndlog__state}{ndlog\-\_\-state}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \\*
+\hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} \hyperlink{model_8h_a544007fecefaaaa03135fb4f09466ef9}{ndlog\-\_\-tuple\-\_\-attribute}
+\item 
+typedef struct \hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} \hyperlink{model_8h_af47256a71e59be5b272ebde1faed798f}{ndlog\-\_\-tuple}
+\item 
+typedef struct \hyperlink{structndlog__state}{ndlog\-\_\-state} \hyperlink{model_8h_ae47e381821fa5b220dd0dbb86c7ba46a}{ndlog\-\_\-state}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{model_8h_ae688e205096dad09ca010b144f151f40}{tuple\-\_\-type} \{ \hyperlink{model_8h_ae688e205096dad09ca010b144f151f40aa15c451953b2d2a93403afe786930d0f}{I\-N\-S\-E\-R\-T}, 
+\hyperlink{model_8h_ae688e205096dad09ca010b144f151f40a9d61e82a9a12752f10aece1b22183913}{D\-E\-L\-E\-T\-E}, 
+\hyperlink{model_8h_ae688e205096dad09ca010b144f151f40a586011d90be069a5203e7bdbcb760302}{R\-E\-C\-V}, 
+\hyperlink{model_8h_ae688e205096dad09ca010b144f151f40a67be7a5f47004345047b32fff72a2230}{S\-E\-N\-D}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{model_8h_ae47e381821fa5b220dd0dbb86c7ba46a}{\index{model.\-h@{model.\-h}!ndlog\-\_\-state@{ndlog\-\_\-state}}
+\index{ndlog\-\_\-state@{ndlog\-\_\-state}!model.h@{model.\-h}}
+\subsubsection[{ndlog\-\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf ndlog\-\_\-state}  {\bf ndlog\-\_\-state}}}\label{model_8h_ae47e381821fa5b220dd0dbb86c7ba46a}
+\hypertarget{model_8h_af47256a71e59be5b272ebde1faed798f}{\index{model.\-h@{model.\-h}!ndlog\-\_\-tuple@{ndlog\-\_\-tuple}}
+\index{ndlog\-\_\-tuple@{ndlog\-\_\-tuple}!model.h@{model.\-h}}
+\subsubsection[{ndlog\-\_\-tuple}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf ndlog\-\_\-tuple}  {\bf ndlog\-\_\-tuple}}}\label{model_8h_af47256a71e59be5b272ebde1faed798f}
+\hypertarget{model_8h_a544007fecefaaaa03135fb4f09466ef9}{\index{model.\-h@{model.\-h}!ndlog\-\_\-tuple\-\_\-attribute@{ndlog\-\_\-tuple\-\_\-attribute}}
+\index{ndlog\-\_\-tuple\-\_\-attribute@{ndlog\-\_\-tuple\-\_\-attribute}!model.h@{model.\-h}}
+\subsubsection[{ndlog\-\_\-tuple\-\_\-attribute}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf ndlog\-\_\-tuple\-\_\-attribute}  {\bf ndlog\-\_\-tuple\-\_\-attribute}}}\label{model_8h_a544007fecefaaaa03135fb4f09466ef9}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{model_8h_ae688e205096dad09ca010b144f151f40}{\index{model.\-h@{model.\-h}!tuple\-\_\-type@{tuple\-\_\-type}}
+\index{tuple\-\_\-type@{tuple\-\_\-type}!model.h@{model.\-h}}
+\subsubsection[{tuple\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf tuple\-\_\-type}}}\label{model_8h_ae688e205096dad09ca010b144f151f40}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{I\-N\-S\-E\-R\-T@{I\-N\-S\-E\-R\-T}!model.\-h@{model.\-h}}\index{model.\-h@{model.\-h}!I\-N\-S\-E\-R\-T@{I\-N\-S\-E\-R\-T}}\item[{\em 
+\hypertarget{model_8h_ae688e205096dad09ca010b144f151f40aa15c451953b2d2a93403afe786930d0f}{I\-N\-S\-E\-R\-T}\label{model_8h_ae688e205096dad09ca010b144f151f40aa15c451953b2d2a93403afe786930d0f}
+}]\index{D\-E\-L\-E\-T\-E@{D\-E\-L\-E\-T\-E}!model.\-h@{model.\-h}}\index{model.\-h@{model.\-h}!D\-E\-L\-E\-T\-E@{D\-E\-L\-E\-T\-E}}\item[{\em 
+\hypertarget{model_8h_ae688e205096dad09ca010b144f151f40a9d61e82a9a12752f10aece1b22183913}{D\-E\-L\-E\-T\-E}\label{model_8h_ae688e205096dad09ca010b144f151f40a9d61e82a9a12752f10aece1b22183913}
+}]\index{R\-E\-C\-V@{R\-E\-C\-V}!model.\-h@{model.\-h}}\index{model.\-h@{model.\-h}!R\-E\-C\-V@{R\-E\-C\-V}}\item[{\em 
+\hypertarget{model_8h_ae688e205096dad09ca010b144f151f40a586011d90be069a5203e7bdbcb760302}{R\-E\-C\-V}\label{model_8h_ae688e205096dad09ca010b144f151f40a586011d90be069a5203e7bdbcb760302}
+}]\index{S\-E\-N\-D@{S\-E\-N\-D}!model.\-h@{model.\-h}}\index{model.\-h@{model.\-h}!S\-E\-N\-D@{S\-E\-N\-D}}\item[{\em 
+\hypertarget{model_8h_ae688e205096dad09ca010b144f151f40a67be7a5f47004345047b32fff72a2230}{S\-E\-N\-D}\label{model_8h_ae688e205096dad09ca010b144f151f40a67be7a5f47004345047b32fff72a2230}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 12 of file model.\-h.
+

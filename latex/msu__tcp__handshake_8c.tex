@@ -1,0 +1,594 @@
+\hypertarget{msu__tcp__handshake_8c}{\section{src/msus/pico\-\_\-tcp/msu\-\_\-tcp\-\_\-handshake.c File Reference}
+\label{msu__tcp__handshake_8c}\index{src/msus/pico\-\_\-tcp/msu\-\_\-tcp\-\_\-handshake.\-c@{src/msus/pico\-\_\-tcp/msu\-\_\-tcp\-\_\-handshake.\-c}}
+}
+{\ttfamily \#include \char`\"{}pico\-\_\-socket.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-socket\-\_\-tcp.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-ipv4.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-tcp.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-eth.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-config.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-protocol.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-tree.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}msu\-\_\-message.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}msu\-\_\-calls.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-tcp/msu\-\_\-tcp\-\_\-handshake.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-tcp/msu\-\_\-pico\-\_\-tcp.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}communication.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}routing.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-tcp/pico\-\_\-hs\-\_\-timers.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-stack.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}logging.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}local\-\_\-msu.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{strucths__internal__state}{hs\-\_\-internal\-\_\-state}
+\item 
+struct \hyperlink{strucths__queue__item}{hs\-\_\-queue\-\_\-item}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{msu__tcp__handshake_8c_a9d68b207ca72291e0c942a14edcb0286}{I\-N\-I\-T\-\_\-\-S\-O\-C\-K\-P\-O\-R\-T}~\{ \{\&L\-E\-A\-F, N\-U\-L\-L\}, 0, 0 \}
+\item 
+\#define \hyperlink{msu__tcp__handshake_8c_a905937e22824286fbcb0da14f263aff1}{P\-R\-O\-T\-O}(s)~((s)-\/$>$proto-\/$>$proto\-\_\-number)
+\item 
+\#define \hyperlink{msu__tcp__handshake_8c_ac4661478dcebc99a9fde018948fa27f9}{P\-I\-C\-O\-\_\-\-M\-I\-N\-\_\-\-M\-S\-S}~(1280)
+\item 
+\#define \hyperlink{msu__tcp__handshake_8c_a37ee99df9b1183467df10604be50f675}{T\-C\-P\-\_\-\-S\-T\-A\-T\-E}(s)~(s-\/$>$\hyperlink{http__parser_8c_adc6e5733fc3c22f0a7b2914188c49c90}{state} \& P\-I\-C\-O\-\_\-\-S\-O\-C\-K\-E\-T\-\_\-\-S\-T\-A\-T\-E\-\_\-\-T\-C\-P)
+\item 
+\#define \hyperlink{msu__tcp__handshake_8c_a9dc54c7e401e0cea1e39e4eab5a4d6ed}{S\-Y\-N\-\_\-\-S\-T\-A\-T\-E\-\_\-\-M\-E\-M\-O\-R\-Y\-\_\-\-L\-I\-M\-I\-T}~(1 $\ast$ 1024 $\ast$ 1024)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct pico\-\_\-socket $\ast$ \hyperlink{msu__tcp__handshake_8c_a67b99fe57c8a91ba24cc5aa120e575ec}{find\-\_\-tcp\-\_\-socket} (struct pico\-\_\-sockport $\ast$sp, struct pico\-\_\-frame $\ast$f)
+\item 
+void $\ast$ \hyperlink{msu__tcp__handshake_8c_ac48224ade6ac444b519a40843a0d6679}{msu\-\_\-tcp\-\_\-hs\-\_\-collect\-\_\-socket} (void $\ast$data)
+\item 
+void \hyperlink{msu__tcp__handshake_8c_a87937f2fa05d47106fc5f3425e512536}{buf\-\_\-to\-\_\-pico\-\_\-frame} (struct pico\-\_\-frame $\ast$$\ast$f, void $\ast$$\ast$buf, uint16\-\_\-t bufsize)
+\item 
+int8\-\_\-t \hyperlink{msu__tcp__handshake_8c_a2e6cb9d40e14ed87ad9ec02560138b2e}{remove\-\_\-completed\-\_\-request} (struct \hyperlink{strucths__internal__state}{hs\-\_\-internal\-\_\-state} $\ast$in\-\_\-state, struct pico\-\_\-socket $\ast$s)
+\item 
+int \hyperlink{msu__tcp__handshake_8c_a61ae4ee9fb59fe3639802348ff4f63cb}{socket\-\_\-cmp} (void $\ast$ka, void $\ast$kb)
+\item 
+\hyperlink{msus_2webserver_2uthash_8h_a435d1572bf3f880d55459d9805097f62}{uint32\-\_\-t} \hyperlink{msu__tcp__handshake_8c_a716cfb8c2d20213a7d64c790dd1d5844}{hs\-\_\-timer\-\_\-add} (heap\-\_\-hs\-\_\-timer\-\_\-ref $\ast$timers, pico\-\_\-time expire, void($\ast$timer)(pico\-\_\-time, void $\ast$, void $\ast$), void $\ast$arg)
+\item 
+void \hyperlink{msu__tcp__handshake_8c_a36e679596cdad9a25e87fa85c0da8614}{hs\-\_\-timer\-\_\-cancel} (heap\-\_\-hs\-\_\-timer\-\_\-ref $\ast$timers, \hyperlink{msus_2webserver_2uthash_8h_a435d1572bf3f880d55459d9805097f62}{uint32\-\_\-t} id)
+\item 
+void \hyperlink{msu__tcp__handshake_8c_a7e57fe37ba00c912fdd2d29e35e0d39f}{hs\-\_\-check\-\_\-timers} (heap\-\_\-hs\-\_\-timer\-\_\-ref $\ast$timers)
+\item 
+static void \hyperlink{msu__tcp__handshake_8c_a5732f954b38404716d08523e6bb90c59}{send\-\_\-to\-\_\-next\-\_\-msu} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, unsigned int message\-\_\-type, char $\ast$buf, int bufsize, int reply\-\_\-msu\-\_\-id)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_a25cb2865d03d21a718ebbefba29f0cc9}{check\-\_\-socket\-\_\-sanity} (struct pico\-\_\-socket $\ast$s)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_aabe9fe10afdb4ff613dd55d9520ee757}{check\-\_\-socket\-\_\-established\-\_\-restore\-\_\-timeout} (struct pico\-\_\-socket $\ast$s)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_a2b20efe99991544ea555692c578e7b5a}{pico\-\_\-sockets\-\_\-check} (struct \hyperlink{strucths__internal__state}{hs\-\_\-internal\-\_\-state} $\ast$in\-\_\-state, int loop\-\_\-score)
+\item 
+static struct pico\-\_\-sockport $\ast$ \hyperlink{msu__tcp__handshake_8c_a2ef7dbfc9263dafc057a7cfe0ef68cdc}{find\-\_\-hs\-\_\-sockport} (struct pico\-\_\-tree $\ast$msu\-\_\-table, uint16\-\_\-t local\-\_\-port)
+\item 
+static int8\-\_\-t \hyperlink{msu__tcp__handshake_8c_a9417125be27e5ae852bb4bfa0cc19a0b}{create\-\_\-hs\-\_\-sockport} (struct pico\-\_\-tree $\ast$msu\-\_\-table, uint16\-\_\-t localport)
+\item 
+static void \hyperlink{msu__tcp__handshake_8c_a3cfd07bd96d5f68d9d7b9b0d590a118e}{tcp\-\_\-send\-\_\-add\-\_\-tcpflags} (struct pico\-\_\-socket\-\_\-tcp $\ast$ts, struct pico\-\_\-frame $\ast$f)
+\item 
+static int8\-\_\-t \hyperlink{msu__tcp__handshake_8c_ae0b20cbbe84a228dfad7ca5aaf027a20}{add\-\_\-pending\-\_\-request} (struct pico\-\_\-tree $\ast$msu\-\_\-table, struct pico\-\_\-socket $\ast$s)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_ad9709659e75dcdeee728eb02b90dac8c}{hs\-\_\-tcp\-\_\-nosync\-\_\-rst} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, struct pico\-\_\-socket $\ast$s, struct pico\-\_\-frame $\ast$fr, int reply\-\_\-msu\-\_\-id)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_ad798dbff81a6269f10c149718b271287}{dedos\-\_\-tcp\-\_\-send\-\_\-synack} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, struct pico\-\_\-socket $\ast$s, int reply\-\_\-msu\-\_\-id)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_acf1b2d6519776eb5f099a53334733368}{handle\-\_\-rst} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, struct pico\-\_\-socket $\ast$s, struct pico\-\_\-frame $\ast$f, int reply\-\_\-msu\-\_\-id)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_a72028bc38dbfc6c0f7abe5490f70df30}{handle\-\_\-syn} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, struct pico\-\_\-tree $\ast$msu\-\_\-table, struct pico\-\_\-frame $\ast$f, int reply\-\_\-msu\-\_\-id)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_a2b308d37d1fbd2c80903c2686615065a}{handle\-\_\-ack} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, struct pico\-\_\-frame $\ast$f, struct pico\-\_\-socket\-\_\-tcp $\ast$t, int reply\-\_\-msu\-\_\-id)
+\item 
+static struct pico\-\_\-socket $\ast$ \hyperlink{msu__tcp__handshake_8c_a798dad83bb8927ed49d13ca4771445ae}{match\-\_\-tcp\-\_\-socket} (struct pico\-\_\-socket $\ast$s, struct pico\-\_\-frame $\ast$f)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_a969c4ea3d9300670efe10a1da7b895c5}{hs\-\_\-tcp\-\_\-send\-\_\-rst} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, struct pico\-\_\-socket $\ast$s, struct pico\-\_\-frame $\ast$fr, int reply\-\_\-msu\-\_\-id)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_a53fb6ee9f0179d835f9daee7320efa41}{msu\-\_\-process\-\_\-hs\-\_\-request\-\_\-in} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, int reply\-\_\-msu\-\_\-id, struct pico\-\_\-frame $\ast$f)
+\item 
+char $\ast$ \hyperlink{msu__tcp__handshake_8c_a139f18abed6919eeb549e268e1284b42}{pico\-\_\-frame\-\_\-to\-\_\-buf} (struct pico\-\_\-frame $\ast$f)
+\item 
+void \hyperlink{msu__tcp__handshake_8c_a8231c3cf83440543f814392d2983ebdc}{print\-\_\-frame} (struct pico\-\_\-frame $\ast$f)
+\item 
+int \hyperlink{msu__tcp__handshake_8c_a97312aaeb1c98fb6dee8669671c622fe}{msu\-\_\-tcp\-\_\-hs\-\_\-same\-\_\-thread\-\_\-transfer} (void $\ast$data, void $\ast$optional\-\_\-data)
+\item 
+static long unsigned int \hyperlink{msu__tcp__handshake_8c_a470d7814451920f687ca99294247d873}{get\-\_\-ts} ()
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_a53ff04d6f1495b5b4ebb9f2342361dd9}{msu\-\_\-tcp\-\_\-process\-\_\-queue\-\_\-item} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$msu, struct \hyperlink{structmsu__msg}{msu\-\_\-msg} $\ast$msg)
+\item 
+static void \hyperlink{msu__tcp__handshake_8c_a9d96739f7e60e51a14685dc96dc59e45}{msu\-\_\-tcp\-\_\-handshake\-\_\-destroy} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self)
+\item 
+static int \hyperlink{msu__tcp__handshake_8c_ae746c7af3486823aa0f13bbb01bdee77}{msu\-\_\-tcp\-\_\-handshake\-\_\-init} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, struct \hyperlink{structmsu__init__data}{msu\-\_\-init\-\_\-data} $\ast$data)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{msus_2webserver_2uthash_8h_a435d1572bf3f880d55459d9805097f62}{uint32\-\_\-t} \hyperlink{msu__tcp__handshake_8c_aadba4d7871ba66d107bf8f169fe1ce15}{base\-\_\-tmr\-\_\-id} = 0u
+\item 
+volatile pico\-\_\-time \hyperlink{msu__tcp__handshake_8c_a0445a47c4a9aeb59e9a56c3e877a0dea}{hs\-\_\-pico\-\_\-tick}
+\item 
+static long int \hyperlink{msu__tcp__handshake_8c_a94b3991f9dca96d223d25532da8ce2b9}{timers\-\_\-count}
+\item 
+static struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$ \hyperlink{msu__tcp__handshake_8c_a9cc1fd513a331f0903ee66ef8d99614f}{H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U}
+\item 
+struct \hyperlink{structmsu__type}{msu\-\_\-type} \hyperlink{msu__tcp__handshake_8c_ab9ace132ef8cc0fc188a427dc39c0c8d}{T\-C\-P\-\_\-\-H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{msu__tcp__handshake_8c_a9d68b207ca72291e0c942a14edcb0286}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!I\-N\-I\-T\-\_\-\-S\-O\-C\-K\-P\-O\-R\-T@{I\-N\-I\-T\-\_\-\-S\-O\-C\-K\-P\-O\-R\-T}}
+\index{I\-N\-I\-T\-\_\-\-S\-O\-C\-K\-P\-O\-R\-T@{I\-N\-I\-T\-\_\-\-S\-O\-C\-K\-P\-O\-R\-T}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{I\-N\-I\-T\-\_\-\-S\-O\-C\-K\-P\-O\-R\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\-N\-I\-T\-\_\-\-S\-O\-C\-K\-P\-O\-R\-T~\{ \{\&L\-E\-A\-F, N\-U\-L\-L\}, 0, 0 \}}}\label{msu__tcp__handshake_8c_a9d68b207ca72291e0c942a14edcb0286}
+
+
+Definition at line 23 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_ac4661478dcebc99a9fde018948fa27f9}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!P\-I\-C\-O\-\_\-\-M\-I\-N\-\_\-\-M\-S\-S@{P\-I\-C\-O\-\_\-\-M\-I\-N\-\_\-\-M\-S\-S}}
+\index{P\-I\-C\-O\-\_\-\-M\-I\-N\-\_\-\-M\-S\-S@{P\-I\-C\-O\-\_\-\-M\-I\-N\-\_\-\-M\-S\-S}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{P\-I\-C\-O\-\_\-\-M\-I\-N\-\_\-\-M\-S\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-I\-C\-O\-\_\-\-M\-I\-N\-\_\-\-M\-S\-S~(1280)}}\label{msu__tcp__handshake_8c_ac4661478dcebc99a9fde018948fa27f9}
+
+
+Definition at line 25 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a905937e22824286fbcb0da14f263aff1}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!P\-R\-O\-T\-O@{P\-R\-O\-T\-O}}
+\index{P\-R\-O\-T\-O@{P\-R\-O\-T\-O}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{P\-R\-O\-T\-O}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-R\-O\-T\-O(
+\begin{DoxyParamCaption}
+\item[{}]{s}
+\end{DoxyParamCaption}
+)~((s)-\/$>$proto-\/$>$proto\-\_\-number)}}\label{msu__tcp__handshake_8c_a905937e22824286fbcb0da14f263aff1}
+
+
+Definition at line 24 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a9dc54c7e401e0cea1e39e4eab5a4d6ed}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!S\-Y\-N\-\_\-\-S\-T\-A\-T\-E\-\_\-\-M\-E\-M\-O\-R\-Y\-\_\-\-L\-I\-M\-I\-T@{S\-Y\-N\-\_\-\-S\-T\-A\-T\-E\-\_\-\-M\-E\-M\-O\-R\-Y\-\_\-\-L\-I\-M\-I\-T}}
+\index{S\-Y\-N\-\_\-\-S\-T\-A\-T\-E\-\_\-\-M\-E\-M\-O\-R\-Y\-\_\-\-L\-I\-M\-I\-T@{S\-Y\-N\-\_\-\-S\-T\-A\-T\-E\-\_\-\-M\-E\-M\-O\-R\-Y\-\_\-\-L\-I\-M\-I\-T}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{S\-Y\-N\-\_\-\-S\-T\-A\-T\-E\-\_\-\-M\-E\-M\-O\-R\-Y\-\_\-\-L\-I\-M\-I\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-Y\-N\-\_\-\-S\-T\-A\-T\-E\-\_\-\-M\-E\-M\-O\-R\-Y\-\_\-\-L\-I\-M\-I\-T~(1 $\ast$ 1024 $\ast$ 1024)}}\label{msu__tcp__handshake_8c_a9dc54c7e401e0cea1e39e4eab5a4d6ed}
+
+
+Definition at line 27 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a37ee99df9b1183467df10604be50f675}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!T\-C\-P\-\_\-\-S\-T\-A\-T\-E@{T\-C\-P\-\_\-\-S\-T\-A\-T\-E}}
+\index{T\-C\-P\-\_\-\-S\-T\-A\-T\-E@{T\-C\-P\-\_\-\-S\-T\-A\-T\-E}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{T\-C\-P\-\_\-\-S\-T\-A\-T\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-C\-P\-\_\-\-S\-T\-A\-T\-E(
+\begin{DoxyParamCaption}
+\item[{}]{s}
+\end{DoxyParamCaption}
+)~(s-\/$>${\bf state} \& P\-I\-C\-O\-\_\-\-S\-O\-C\-K\-E\-T\-\_\-\-S\-T\-A\-T\-E\-\_\-\-T\-C\-P)}}\label{msu__tcp__handshake_8c_a37ee99df9b1183467df10604be50f675}
+
+
+Definition at line 26 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{msu__tcp__handshake_8c_ae0b20cbbe84a228dfad7ca5aaf027a20}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!add\-\_\-pending\-\_\-request@{add\-\_\-pending\-\_\-request}}
+\index{add\-\_\-pending\-\_\-request@{add\-\_\-pending\-\_\-request}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{add\-\_\-pending\-\_\-request}]{\setlength{\rightskip}{0pt plus 5cm}static int8\-\_\-t add\-\_\-pending\-\_\-request (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-tree $\ast$}]{msu\-\_\-table, }
+\item[{struct pico\-\_\-socket $\ast$}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_ae0b20cbbe84a228dfad7ca5aaf027a20}
+
+
+Definition at line 516 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a87937f2fa05d47106fc5f3425e512536}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!buf\-\_\-to\-\_\-pico\-\_\-frame@{buf\-\_\-to\-\_\-pico\-\_\-frame}}
+\index{buf\-\_\-to\-\_\-pico\-\_\-frame@{buf\-\_\-to\-\_\-pico\-\_\-frame}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{buf\-\_\-to\-\_\-pico\-\_\-frame}]{\setlength{\rightskip}{0pt plus 5cm}void buf\-\_\-to\-\_\-pico\-\_\-frame (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-frame $\ast$$\ast$}]{f, }
+\item[{void $\ast$$\ast$}]{buf, }
+\item[{uint16\-\_\-t}]{bufsize}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_a87937f2fa05d47106fc5f3425e512536}
+
+
+Definition at line 1225 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_aabe9fe10afdb4ff613dd55d9520ee757}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!check\-\_\-socket\-\_\-established\-\_\-restore\-\_\-timeout@{check\-\_\-socket\-\_\-established\-\_\-restore\-\_\-timeout}}
+\index{check\-\_\-socket\-\_\-established\-\_\-restore\-\_\-timeout@{check\-\_\-socket\-\_\-established\-\_\-restore\-\_\-timeout}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{check\-\_\-socket\-\_\-established\-\_\-restore\-\_\-timeout}]{\setlength{\rightskip}{0pt plus 5cm}static int check\-\_\-socket\-\_\-established\-\_\-restore\-\_\-timeout (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-socket $\ast$}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_aabe9fe10afdb4ff613dd55d9520ee757}
+
+
+Definition at line 282 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a25cb2865d03d21a718ebbefba29f0cc9}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!check\-\_\-socket\-\_\-sanity@{check\-\_\-socket\-\_\-sanity}}
+\index{check\-\_\-socket\-\_\-sanity@{check\-\_\-socket\-\_\-sanity}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{check\-\_\-socket\-\_\-sanity}]{\setlength{\rightskip}{0pt plus 5cm}static int check\-\_\-socket\-\_\-sanity (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-socket $\ast$}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a25cb2865d03d21a718ebbefba29f0cc9}
+
+
+Definition at line 268 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a9417125be27e5ae852bb4bfa0cc19a0b}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!create\-\_\-hs\-\_\-sockport@{create\-\_\-hs\-\_\-sockport}}
+\index{create\-\_\-hs\-\_\-sockport@{create\-\_\-hs\-\_\-sockport}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{create\-\_\-hs\-\_\-sockport}]{\setlength{\rightskip}{0pt plus 5cm}static int8\-\_\-t create\-\_\-hs\-\_\-sockport (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-tree $\ast$}]{msu\-\_\-table, }
+\item[{uint16\-\_\-t}]{localport}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a9417125be27e5ae852bb4bfa0cc19a0b}
+
+
+Definition at line 437 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_ad798dbff81a6269f10c149718b271287}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!dedos\-\_\-tcp\-\_\-send\-\_\-synack@{dedos\-\_\-tcp\-\_\-send\-\_\-synack}}
+\index{dedos\-\_\-tcp\-\_\-send\-\_\-synack@{dedos\-\_\-tcp\-\_\-send\-\_\-synack}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{dedos\-\_\-tcp\-\_\-send\-\_\-synack}]{\setlength{\rightskip}{0pt plus 5cm}static int dedos\-\_\-tcp\-\_\-send\-\_\-synack (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{struct pico\-\_\-socket $\ast$}]{s, }
+\item[{int}]{reply\-\_\-msu\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_ad798dbff81a6269f10c149718b271287}
+
+
+Definition at line 605 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a2ef7dbfc9263dafc057a7cfe0ef68cdc}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!find\-\_\-hs\-\_\-sockport@{find\-\_\-hs\-\_\-sockport}}
+\index{find\-\_\-hs\-\_\-sockport@{find\-\_\-hs\-\_\-sockport}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{find\-\_\-hs\-\_\-sockport}]{\setlength{\rightskip}{0pt plus 5cm}static struct pico\-\_\-sockport$\ast$ find\-\_\-hs\-\_\-sockport (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-tree $\ast$}]{msu\-\_\-table, }
+\item[{uint16\-\_\-t}]{local\-\_\-port}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a2ef7dbfc9263dafc057a7cfe0ef68cdc}
+
+
+Definition at line 428 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a67b99fe57c8a91ba24cc5aa120e575ec}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!find\-\_\-tcp\-\_\-socket@{find\-\_\-tcp\-\_\-socket}}
+\index{find\-\_\-tcp\-\_\-socket@{find\-\_\-tcp\-\_\-socket}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{find\-\_\-tcp\-\_\-socket}]{\setlength{\rightskip}{0pt plus 5cm}struct pico\-\_\-socket $\ast$ find\-\_\-tcp\-\_\-socket (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-sockport $\ast$}]{sp, }
+\item[{struct pico\-\_\-frame $\ast$}]{f}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_a67b99fe57c8a91ba24cc5aa120e575ec}
+
+
+Definition at line 837 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a470d7814451920f687ca99294247d873}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!get\-\_\-ts@{get\-\_\-ts}}
+\index{get\-\_\-ts@{get\-\_\-ts}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{get\-\_\-ts}]{\setlength{\rightskip}{0pt plus 5cm}static long unsigned int get\-\_\-ts (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a470d7814451920f687ca99294247d873}
+
+
+Definition at line 1371 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a2b308d37d1fbd2c80903c2686615065a}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!handle\-\_\-ack@{handle\-\_\-ack}}
+\index{handle\-\_\-ack@{handle\-\_\-ack}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{handle\-\_\-ack}]{\setlength{\rightskip}{0pt plus 5cm}static int handle\-\_\-ack (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{struct pico\-\_\-frame $\ast$}]{f, }
+\item[{struct pico\-\_\-socket\-\_\-tcp $\ast$}]{t, }
+\item[{int}]{reply\-\_\-msu\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a2b308d37d1fbd2c80903c2686615065a}
+
+
+Definition at line 768 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_acf1b2d6519776eb5f099a53334733368}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!handle\-\_\-rst@{handle\-\_\-rst}}
+\index{handle\-\_\-rst@{handle\-\_\-rst}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{handle\-\_\-rst}]{\setlength{\rightskip}{0pt plus 5cm}static int handle\-\_\-rst (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{struct pico\-\_\-socket $\ast$}]{s, }
+\item[{struct pico\-\_\-frame $\ast$}]{f, }
+\item[{int}]{reply\-\_\-msu\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_acf1b2d6519776eb5f099a53334733368}
+
+
+Definition at line 671 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a72028bc38dbfc6c0f7abe5490f70df30}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!handle\-\_\-syn@{handle\-\_\-syn}}
+\index{handle\-\_\-syn@{handle\-\_\-syn}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{handle\-\_\-syn}]{\setlength{\rightskip}{0pt plus 5cm}static int handle\-\_\-syn (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{struct pico\-\_\-tree $\ast$}]{msu\-\_\-table, }
+\item[{struct pico\-\_\-frame $\ast$}]{f, }
+\item[{int}]{reply\-\_\-msu\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a72028bc38dbfc6c0f7abe5490f70df30}
+
+
+Definition at line 687 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a7e57fe37ba00c912fdd2d29e35e0d39f}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!hs\-\_\-check\-\_\-timers@{hs\-\_\-check\-\_\-timers}}
+\index{hs\-\_\-check\-\_\-timers@{hs\-\_\-check\-\_\-timers}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{hs\-\_\-check\-\_\-timers}]{\setlength{\rightskip}{0pt plus 5cm}void hs\-\_\-check\-\_\-timers (
+\begin{DoxyParamCaption}
+\item[{heap\-\_\-hs\-\_\-timer\-\_\-ref $\ast$}]{timers}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_a7e57fe37ba00c912fdd2d29e35e0d39f}
+
+
+Definition at line 186 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_ad9709659e75dcdeee728eb02b90dac8c}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!hs\-\_\-tcp\-\_\-nosync\-\_\-rst@{hs\-\_\-tcp\-\_\-nosync\-\_\-rst}}
+\index{hs\-\_\-tcp\-\_\-nosync\-\_\-rst@{hs\-\_\-tcp\-\_\-nosync\-\_\-rst}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{hs\-\_\-tcp\-\_\-nosync\-\_\-rst}]{\setlength{\rightskip}{0pt plus 5cm}static int hs\-\_\-tcp\-\_\-nosync\-\_\-rst (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{struct pico\-\_\-socket $\ast$}]{s, }
+\item[{struct pico\-\_\-frame $\ast$}]{fr, }
+\item[{int}]{reply\-\_\-msu\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_ad9709659e75dcdeee728eb02b90dac8c}
+
+
+Definition at line 541 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a969c4ea3d9300670efe10a1da7b895c5}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!hs\-\_\-tcp\-\_\-send\-\_\-rst@{hs\-\_\-tcp\-\_\-send\-\_\-rst}}
+\index{hs\-\_\-tcp\-\_\-send\-\_\-rst@{hs\-\_\-tcp\-\_\-send\-\_\-rst}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{hs\-\_\-tcp\-\_\-send\-\_\-rst}]{\setlength{\rightskip}{0pt plus 5cm}static int hs\-\_\-tcp\-\_\-send\-\_\-rst (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{struct pico\-\_\-socket $\ast$}]{s, }
+\item[{struct pico\-\_\-frame $\ast$}]{fr, }
+\item[{int}]{reply\-\_\-msu\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a969c4ea3d9300670efe10a1da7b895c5}
+
+
+Definition at line 861 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a716cfb8c2d20213a7d64c790dd1d5844}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!hs\-\_\-timer\-\_\-add@{hs\-\_\-timer\-\_\-add}}
+\index{hs\-\_\-timer\-\_\-add@{hs\-\_\-timer\-\_\-add}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{hs\-\_\-timer\-\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32\-\_\-t} hs\-\_\-timer\-\_\-add (
+\begin{DoxyParamCaption}
+\item[{heap\-\_\-hs\-\_\-timer\-\_\-ref $\ast$}]{timers, }
+\item[{pico\-\_\-time}]{expire, }
+\item[{void($\ast$)(pico\-\_\-time, void $\ast$, void $\ast$)}]{timer, }
+\item[{void $\ast$}]{arg}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_a716cfb8c2d20213a7d64c790dd1d5844}
+
+
+Definition at line 141 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a36e679596cdad9a25e87fa85c0da8614}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!hs\-\_\-timer\-\_\-cancel@{hs\-\_\-timer\-\_\-cancel}}
+\index{hs\-\_\-timer\-\_\-cancel@{hs\-\_\-timer\-\_\-cancel}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{hs\-\_\-timer\-\_\-cancel}]{\setlength{\rightskip}{0pt plus 5cm}void hs\-\_\-timer\-\_\-cancel (
+\begin{DoxyParamCaption}
+\item[{heap\-\_\-hs\-\_\-timer\-\_\-ref $\ast$}]{timers, }
+\item[{{\bf uint32\-\_\-t}}]{id}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_a36e679596cdad9a25e87fa85c0da8614}
+
+
+Definition at line 168 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a798dad83bb8927ed49d13ca4771445ae}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!match\-\_\-tcp\-\_\-socket@{match\-\_\-tcp\-\_\-socket}}
+\index{match\-\_\-tcp\-\_\-socket@{match\-\_\-tcp\-\_\-socket}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{match\-\_\-tcp\-\_\-socket}]{\setlength{\rightskip}{0pt plus 5cm}static struct pico\-\_\-socket$\ast$ match\-\_\-tcp\-\_\-socket (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-socket $\ast$}]{s, }
+\item[{struct pico\-\_\-frame $\ast$}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a798dad83bb8927ed49d13ca4771445ae}
+
+
+Definition at line 811 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a53fb6ee9f0179d835f9daee7320efa41}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!msu\-\_\-process\-\_\-hs\-\_\-request\-\_\-in@{msu\-\_\-process\-\_\-hs\-\_\-request\-\_\-in}}
+\index{msu\-\_\-process\-\_\-hs\-\_\-request\-\_\-in@{msu\-\_\-process\-\_\-hs\-\_\-request\-\_\-in}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{msu\-\_\-process\-\_\-hs\-\_\-request\-\_\-in}]{\setlength{\rightskip}{0pt plus 5cm}static int msu\-\_\-process\-\_\-hs\-\_\-request\-\_\-in (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{int}]{reply\-\_\-msu\-\_\-id, }
+\item[{struct pico\-\_\-frame $\ast$}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a53fb6ee9f0179d835f9daee7320efa41}
+Now called in msu\-\_\-process\-\_\-queue\-\_\-item anyway pico\-\_\-sockets\-\_\-pending\-\_\-ack\-\_\-check(in\-\_\-state); //for connection that only sent S\-Y\-N pico\-\_\-sockets\-\_\-pending\-\_\-restore\-\_\-check(in\-\_\-state); //for sockets pending restore
+
+Definition at line 931 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a9d96739f7e60e51a14685dc96dc59e45}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!msu\-\_\-tcp\-\_\-handshake\-\_\-destroy@{msu\-\_\-tcp\-\_\-handshake\-\_\-destroy}}
+\index{msu\-\_\-tcp\-\_\-handshake\-\_\-destroy@{msu\-\_\-tcp\-\_\-handshake\-\_\-destroy}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{msu\-\_\-tcp\-\_\-handshake\-\_\-destroy}]{\setlength{\rightskip}{0pt plus 5cm}static void msu\-\_\-tcp\-\_\-handshake\-\_\-destroy (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a9d96739f7e60e51a14685dc96dc59e45}
+
+
+Definition at line 1467 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_ae746c7af3486823aa0f13bbb01bdee77}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!msu\-\_\-tcp\-\_\-handshake\-\_\-init@{msu\-\_\-tcp\-\_\-handshake\-\_\-init}}
+\index{msu\-\_\-tcp\-\_\-handshake\-\_\-init@{msu\-\_\-tcp\-\_\-handshake\-\_\-init}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{msu\-\_\-tcp\-\_\-handshake\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}static int msu\-\_\-tcp\-\_\-handshake\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{struct {\bf msu\-\_\-init\-\_\-data} $\ast$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_ae746c7af3486823aa0f13bbb01bdee77}
+
+
+Definition at line 1484 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_ac48224ade6ac444b519a40843a0d6679}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!msu\-\_\-tcp\-\_\-hs\-\_\-collect\-\_\-socket@{msu\-\_\-tcp\-\_\-hs\-\_\-collect\-\_\-socket}}
+\index{msu\-\_\-tcp\-\_\-hs\-\_\-collect\-\_\-socket@{msu\-\_\-tcp\-\_\-hs\-\_\-collect\-\_\-socket}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{msu\-\_\-tcp\-\_\-hs\-\_\-collect\-\_\-socket}]{\setlength{\rightskip}{0pt plus 5cm}void $\ast$ msu\-\_\-tcp\-\_\-hs\-\_\-collect\-\_\-socket (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{data}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_ac48224ade6ac444b519a40843a0d6679}
+
+
+Definition at line 1127 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a97312aaeb1c98fb6dee8669671c622fe}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!msu\-\_\-tcp\-\_\-hs\-\_\-same\-\_\-thread\-\_\-transfer@{msu\-\_\-tcp\-\_\-hs\-\_\-same\-\_\-thread\-\_\-transfer}}
+\index{msu\-\_\-tcp\-\_\-hs\-\_\-same\-\_\-thread\-\_\-transfer@{msu\-\_\-tcp\-\_\-hs\-\_\-same\-\_\-thread\-\_\-transfer}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{msu\-\_\-tcp\-\_\-hs\-\_\-same\-\_\-thread\-\_\-transfer}]{\setlength{\rightskip}{0pt plus 5cm}int msu\-\_\-tcp\-\_\-hs\-\_\-same\-\_\-thread\-\_\-transfer (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{data, }
+\item[{void $\ast$}]{optional\-\_\-data}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_a97312aaeb1c98fb6dee8669671c622fe}
+
+
+Definition at line 1331 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a53ff04d6f1495b5b4ebb9f2342361dd9}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!msu\-\_\-tcp\-\_\-process\-\_\-queue\-\_\-item@{msu\-\_\-tcp\-\_\-process\-\_\-queue\-\_\-item}}
+\index{msu\-\_\-tcp\-\_\-process\-\_\-queue\-\_\-item@{msu\-\_\-tcp\-\_\-process\-\_\-queue\-\_\-item}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{msu\-\_\-tcp\-\_\-process\-\_\-queue\-\_\-item}]{\setlength{\rightskip}{0pt plus 5cm}static int msu\-\_\-tcp\-\_\-process\-\_\-queue\-\_\-item (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{msu, }
+\item[{struct {\bf msu\-\_\-msg} $\ast$}]{msg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a53ff04d6f1495b5b4ebb9f2342361dd9}
+
+
+Definition at line 1380 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a139f18abed6919eeb549e268e1284b42}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!pico\-\_\-frame\-\_\-to\-\_\-buf@{pico\-\_\-frame\-\_\-to\-\_\-buf}}
+\index{pico\-\_\-frame\-\_\-to\-\_\-buf@{pico\-\_\-frame\-\_\-to\-\_\-buf}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{pico\-\_\-frame\-\_\-to\-\_\-buf}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ pico\-\_\-frame\-\_\-to\-\_\-buf (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-frame $\ast$}]{f}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_a139f18abed6919eeb549e268e1284b42}
+
+
+Definition at line 1208 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a2b20efe99991544ea555692c578e7b5a}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!pico\-\_\-sockets\-\_\-check@{pico\-\_\-sockets\-\_\-check}}
+\index{pico\-\_\-sockets\-\_\-check@{pico\-\_\-sockets\-\_\-check}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{pico\-\_\-sockets\-\_\-check}]{\setlength{\rightskip}{0pt plus 5cm}static int pico\-\_\-sockets\-\_\-check (
+\begin{DoxyParamCaption}
+\item[{struct {\bf hs\-\_\-internal\-\_\-state} $\ast$}]{in\-\_\-state, }
+\item[{int}]{loop\-\_\-score}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a2b20efe99991544ea555692c578e7b5a}
+
+
+Definition at line 315 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a8231c3cf83440543f814392d2983ebdc}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!print\-\_\-frame@{print\-\_\-frame}}
+\index{print\-\_\-frame@{print\-\_\-frame}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{print\-\_\-frame}]{\setlength{\rightskip}{0pt plus 5cm}void print\-\_\-frame (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-frame $\ast$}]{f}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_a8231c3cf83440543f814392d2983ebdc}
+
+
+Definition at line 1238 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a2e6cb9d40e14ed87ad9ec02560138b2e}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!remove\-\_\-completed\-\_\-request@{remove\-\_\-completed\-\_\-request}}
+\index{remove\-\_\-completed\-\_\-request@{remove\-\_\-completed\-\_\-request}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{remove\-\_\-completed\-\_\-request}]{\setlength{\rightskip}{0pt plus 5cm}int8\-\_\-t remove\-\_\-completed\-\_\-request (
+\begin{DoxyParamCaption}
+\item[{struct {\bf hs\-\_\-internal\-\_\-state} $\ast$}]{in\-\_\-state, }
+\item[{struct pico\-\_\-socket $\ast$}]{s}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_a2e6cb9d40e14ed87ad9ec02560138b2e}
+
+
+Definition at line 460 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a5732f954b38404716d08523e6bb90c59}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!send\-\_\-to\-\_\-next\-\_\-msu@{send\-\_\-to\-\_\-next\-\_\-msu}}
+\index{send\-\_\-to\-\_\-next\-\_\-msu@{send\-\_\-to\-\_\-next\-\_\-msu}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{send\-\_\-to\-\_\-next\-\_\-msu}]{\setlength{\rightskip}{0pt plus 5cm}static void send\-\_\-to\-\_\-next\-\_\-msu (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{unsigned int}]{message\-\_\-type, }
+\item[{char $\ast$}]{buf, }
+\item[{int}]{bufsize, }
+\item[{int}]{reply\-\_\-msu\-\_\-id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a5732f954b38404716d08523e6bb90c59}
+
+
+Definition at line 208 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a61ae4ee9fb59fe3639802348ff4f63cb}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!socket\-\_\-cmp@{socket\-\_\-cmp}}
+\index{socket\-\_\-cmp@{socket\-\_\-cmp}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{socket\-\_\-cmp}]{\setlength{\rightskip}{0pt plus 5cm}int socket\-\_\-cmp (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{ka, }
+\item[{void $\ast$}]{kb}
+\end{DoxyParamCaption}
+)}}\label{msu__tcp__handshake_8c_a61ae4ee9fb59fe3639802348ff4f63cb}
+\hypertarget{msu__tcp__handshake_8c_a3cfd07bd96d5f68d9d7b9b0d590a118e}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!tcp\-\_\-send\-\_\-add\-\_\-tcpflags@{tcp\-\_\-send\-\_\-add\-\_\-tcpflags}}
+\index{tcp\-\_\-send\-\_\-add\-\_\-tcpflags@{tcp\-\_\-send\-\_\-add\-\_\-tcpflags}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{tcp\-\_\-send\-\_\-add\-\_\-tcpflags}]{\setlength{\rightskip}{0pt plus 5cm}static void tcp\-\_\-send\-\_\-add\-\_\-tcpflags (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-socket\-\_\-tcp $\ast$}]{ts, }
+\item[{struct pico\-\_\-frame $\ast$}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a3cfd07bd96d5f68d9d7b9b0d590a118e}
+
+
+Definition at line 492 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{msu__tcp__handshake_8c_aadba4d7871ba66d107bf8f169fe1ce15}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!base\-\_\-tmr\-\_\-id@{base\-\_\-tmr\-\_\-id}}
+\index{base\-\_\-tmr\-\_\-id@{base\-\_\-tmr\-\_\-id}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{base\-\_\-tmr\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32\-\_\-t} base\-\_\-tmr\-\_\-id = 0u\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_aadba4d7871ba66d107bf8f169fe1ce15}
+
+
+Definition at line 30 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a9cc1fd513a331f0903ee66ef8d99614f}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U@{H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U}}
+\index{H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U@{H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf local\-\_\-msu}$\ast$ H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a9cc1fd513a331f0903ee66ef8d99614f}
+
+
+Definition at line 1482 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a0445a47c4a9aeb59e9a56c3e877a0dea}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!hs\-\_\-pico\-\_\-tick@{hs\-\_\-pico\-\_\-tick}}
+\index{hs\-\_\-pico\-\_\-tick@{hs\-\_\-pico\-\_\-tick}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{hs\-\_\-pico\-\_\-tick}]{\setlength{\rightskip}{0pt plus 5cm}volatile pico\-\_\-time hs\-\_\-pico\-\_\-tick}}\label{msu__tcp__handshake_8c_a0445a47c4a9aeb59e9a56c3e877a0dea}
+
+
+Definition at line 71 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_ab9ace132ef8cc0fc188a427dc39c0c8d}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!T\-C\-P\-\_\-\-H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E@{T\-C\-P\-\_\-\-H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E}}
+\index{T\-C\-P\-\_\-\-H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E@{T\-C\-P\-\_\-\-H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{T\-C\-P\-\_\-\-H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf msu\-\_\-type} T\-C\-P\-\_\-\-H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E}}\label{msu__tcp__handshake_8c_ab9ace132ef8cc0fc188a427dc39c0c8d}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \{
+    .name=\textcolor{stringliteral}{"tcp\_handshake\_msu"},
+    .id=\hyperlink{msu__tcp__handshake_8h_af67ea9602c651e0f2a906f1ec239352a}{TCP\_HANDSHAKE\_MSU\_TYPE\_ID},
+    .init=\hyperlink{msu__tcp__handshake_8c_ae746c7af3486823aa0f13bbb01bdee77}{msu\_tcp\_handshake\_init},
+    .destroy=\hyperlink{msu__tcp__handshake_8c_a9d96739f7e60e51a14685dc96dc59e45}{msu\_tcp\_handshake\_destroy},
+    .receive=\hyperlink{msu__tcp__handshake_8c_a53ff04d6f1495b5b4ebb9f2342361dd9}{msu\_tcp\_process\_queue\_item},
+\}
+\end{DoxyCode}
+
+
+Definition at line 1583 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+
+\hypertarget{msu__tcp__handshake_8c_a94b3991f9dca96d223d25532da8ce2b9}{\index{msu\-\_\-tcp\-\_\-handshake.\-c@{msu\-\_\-tcp\-\_\-handshake.\-c}!timers\-\_\-count@{timers\-\_\-count}}
+\index{timers\-\_\-count@{timers\-\_\-count}!msu_tcp_handshake.c@{msu\-\_\-tcp\-\_\-handshake.\-c}}
+\subsubsection[{timers\-\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}long int timers\-\_\-count\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__tcp__handshake_8c_a94b3991f9dca96d223d25532da8ce2b9}
+
+
+Definition at line 72 of file msu\-\_\-tcp\-\_\-handshake.\-c.
+

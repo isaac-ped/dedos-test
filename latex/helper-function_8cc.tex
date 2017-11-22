@@ -1,0 +1,290 @@
+\hypertarget{helper-function_8cc}{\section{src/msus/ndlog/helper-\/function.cc File Reference}
+\label{helper-function_8cc}\index{src/msus/ndlog/helper-\/function.\-cc@{src/msus/ndlog/helper-\/function.\-cc}}
+}
+{\ttfamily \#include \char`\"{}local\-\_\-msu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}msu\-\_\-calls.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ndlog/ndlog\-\_\-recv\-\_\-msu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}helper-\/function.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{msus_2webserver_2uthash_8h_a435d1572bf3f880d55459d9805097f62}{uint32\-\_\-t} \hyperlink{helper-function_8cc_aadd03fb3a74f1cdecd87bbd2a18a6788}{read\-Uint32} (char $\ast$buf)
+\item 
+\hyperlink{structndlog__state}{ndlog\-\_\-state} $\ast$ \hyperlink{helper-function_8cc_a8ac805dfecdda56f489a52689df50955}{Add\-State} (string state\-Name, string key\-List\mbox{[}$\,$\mbox{]}, int list\-Len)
+\item 
+bool \hyperlink{helper-function_8cc_a1ef30aab6706faf1972bbc3ce2df03d3}{is\-Recv\-Event} (\hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$arrival\-Tuple, string state\-Name)
+\item 
+\hyperlink{structndlog__state}{ndlog\-\_\-state} $\ast$ \hyperlink{helper-function_8cc_a0ab06924c91416c26f84e4bf50c0a367}{Get\-State} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, string state\-Name)
+\item 
+map$<$ string, \hyperlink{class_n_d___value}{N\-D\-\_\-\-Value} $\ast$ $>$ \hyperlink{helper-function_8cc_a2e7b86789b841df071507f7d301b16ea}{Get\-Attr\-Data} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, string state\-Name, string attr\-Name)
+\item 
+deque$<$ \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ \hyperlink{helper-function_8cc_a949644440d7002f63f57c4d249e936f6}{Make\-Attribute\-List} (const string name\-List\mbox{[}$\,$\mbox{]}, int list\-Len)
+\item 
+\hyperlink{structndlog__state}{ndlog\-\_\-state} $\ast$ \hyperlink{helper-function_8cc_a5e335a6a9e3ded6bc49fcb946241a3f6}{do\-\_\-join\-\_\-st} (\hyperlink{structndlog__state}{ndlog\-\_\-state} $\ast$s, \hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$t, deque$<$ \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$sa, deque$<$ \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$ta)
+\item 
+\hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$ \hyperlink{helper-function_8cc_a3af4d8ab83a55e09c7258f92b6ba3f6b}{do\-\_\-join\-\_\-tt} (\hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$t1, \hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$t2, deque$<$ \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$a1, deque$<$ \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$a2)
+\item 
+\hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ \hyperlink{helper-function_8cc_a4d7e8bda6fe9e0195da6c80951077f42}{get\-\_\-tuple\-\_\-attr} (\hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$t, string \hyperlink{http__parser_8c_a8f8f80d37794cde9472343e4487ba3eb}{name})
+\item 
+bool \hyperlink{helper-function_8cc_a7ba40978a7c6904ea85168981299da89}{has\-\_\-attr} (deque$<$ \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$a, string \hyperlink{http__parser_8c_a8f8f80d37794cde9472343e4487ba3eb}{name})
+\item 
+void \hyperlink{helper-function_8cc_afdd669347d9fea1e3d9f3e1cdd1ede08}{do\-\_\-append} (\hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$tup, \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$attr)
+\item 
+void \hyperlink{helper-function_8cc_a5da3f4446e98fbe68949cf2521996730}{copy\-\_\-attr} (\hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$dst, \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$src)
+\item 
+\hyperlink{structndlog__state}{ndlog\-\_\-state} $\ast$ \hyperlink{helper-function_8cc_a20885005d76692c36c0af920a9ca58c0}{do\-\_\-project\-\_\-s} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, \hyperlink{structndlog__state}{ndlog\-\_\-state} $\ast$s, deque$<$ \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$old\-\_\-attrs, deque$<$ \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$new\-\_\-attrs, string state\-Name)
+\item 
+\hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$ \hyperlink{helper-function_8cc_afffd163f6938cde2285249a95e7a1e38}{do\-\_\-project\-\_\-t} (\hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$t, deque$<$ \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$old\-\_\-attrs, deque$<$ \hyperlink{structndlog__tuple__attribute}{ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$new\-\_\-attrs, map$<$ string, string $>$ $\ast$key\-\_\-attr)
+\item 
+void \hyperlink{helper-function_8cc_a67e3619fb8bab96644f4a6d3edf8b95e}{update\-Tuple\-Type} (\hyperlink{structndlog__state}{ndlog\-\_\-state} $\ast$\hyperlink{http__parser_8c_adc6e5733fc3c22f0a7b2914188c49c90}{state}, enum \hyperlink{model_8h_ae688e205096dad09ca010b144f151f40}{tuple\-\_\-type} tp\-Type)
+\item 
+void \hyperlink{helper-function_8cc_ae1c240522c5fe714f798814dc0ad92e1}{copy\-\_\-tuple} (\hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$dst, \hyperlink{structndlog__tuple}{ndlog\-\_\-tuple} $\ast$src)
+\item 
+void \hyperlink{helper-function_8cc_ad1f32e269267b0398216cc0f5b9d7f65}{result\-\_\-to\-\_\-msu\-\_\-calls} (\hyperlink{structndlog__state}{ndlog\-\_\-state} $\ast$result, struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$sender, struct \hyperlink{structmsu__msg__hdr}{msu\-\_\-msg\-\_\-hdr} $\ast$hdr)
+\item 
+\hyperlink{msus_2webserver_2uthash_8h_a435d1572bf3f880d55459d9805097f62}{uint32\-\_\-t} \hyperlink{helper-function_8cc_a1e2ed2e91118eb8872615e5c4ccdffdb}{Ascii\-To\-Ipv4\-Host} (char const $\ast$address)
+\item 
+void \hyperlink{helper-function_8cc_acc79d85fb784ed49b7e0b94f0e980f8f}{Add\-Data} (map$<$ string, \hyperlink{structndlog__state}{ndlog\-\_\-state} $\ast$ $>$ $\ast$D\-B, string table\-Name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{helper-function_8cc_acc79d85fb784ed49b7e0b94f0e980f8f}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!Add\-Data@{Add\-Data}}
+\index{Add\-Data@{Add\-Data}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{Add\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Add\-Data (
+\begin{DoxyParamCaption}
+\item[{map$<$ string, {\bf ndlog\-\_\-state} $\ast$ $>$ $\ast$}]{D\-B, }
+\item[{string}]{table\-Name}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_acc79d85fb784ed49b7e0b94f0e980f8f}
+
+
+Definition at line 452 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a8ac805dfecdda56f489a52689df50955}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!Add\-State@{Add\-State}}
+\index{Add\-State@{Add\-State}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{Add\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ndlog\-\_\-state}$\ast$ Add\-State (
+\begin{DoxyParamCaption}
+\item[{string}]{state\-Name, }
+\item[{string}]{key\-List\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{list\-Len}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a8ac805dfecdda56f489a52689df50955}
+
+
+Definition at line 35 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a1e2ed2e91118eb8872615e5c4ccdffdb}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!Ascii\-To\-Ipv4\-Host@{Ascii\-To\-Ipv4\-Host}}
+\index{Ascii\-To\-Ipv4\-Host@{Ascii\-To\-Ipv4\-Host}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{Ascii\-To\-Ipv4\-Host}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32\-\_\-t} Ascii\-To\-Ipv4\-Host (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{address}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a1e2ed2e91118eb8872615e5c4ccdffdb}
+
+
+Definition at line 431 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a5da3f4446e98fbe68949cf2521996730}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!copy\-\_\-attr@{copy\-\_\-attr}}
+\index{copy\-\_\-attr@{copy\-\_\-attr}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{copy\-\_\-attr}]{\setlength{\rightskip}{0pt plus 5cm}void copy\-\_\-attr (
+\begin{DoxyParamCaption}
+\item[{{\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$}]{dst, }
+\item[{{\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$}]{src}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a5da3f4446e98fbe68949cf2521996730}
+
+
+Definition at line 273 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_ae1c240522c5fe714f798814dc0ad92e1}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!copy\-\_\-tuple@{copy\-\_\-tuple}}
+\index{copy\-\_\-tuple@{copy\-\_\-tuple}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{copy\-\_\-tuple}]{\setlength{\rightskip}{0pt plus 5cm}void copy\-\_\-tuple (
+\begin{DoxyParamCaption}
+\item[{{\bf ndlog\-\_\-tuple} $\ast$}]{dst, }
+\item[{{\bf ndlog\-\_\-tuple} $\ast$}]{src}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_ae1c240522c5fe714f798814dc0ad92e1}
+
+
+Definition at line 409 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_afdd669347d9fea1e3d9f3e1cdd1ede08}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!do\-\_\-append@{do\-\_\-append}}
+\index{do\-\_\-append@{do\-\_\-append}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{do\-\_\-append}]{\setlength{\rightskip}{0pt plus 5cm}void do\-\_\-append (
+\begin{DoxyParamCaption}
+\item[{{\bf ndlog\-\_\-tuple} $\ast$}]{tup, }
+\item[{{\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$}]{attr}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_afdd669347d9fea1e3d9f3e1cdd1ede08}
+
+
+Definition at line 265 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a5e335a6a9e3ded6bc49fcb946241a3f6}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!do\-\_\-join\-\_\-st@{do\-\_\-join\-\_\-st}}
+\index{do\-\_\-join\-\_\-st@{do\-\_\-join\-\_\-st}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{do\-\_\-join\-\_\-st}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ndlog\-\_\-state}$\ast$ do\-\_\-join\-\_\-st (
+\begin{DoxyParamCaption}
+\item[{{\bf ndlog\-\_\-state} $\ast$}]{s, }
+\item[{{\bf ndlog\-\_\-tuple} $\ast$}]{t, }
+\item[{deque$<$ {\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$}]{sa, }
+\item[{deque$<$ {\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$}]{ta}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a5e335a6a9e3ded6bc49fcb946241a3f6}
+
+
+Definition at line 127 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a3af4d8ab83a55e09c7258f92b6ba3f6b}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!do\-\_\-join\-\_\-tt@{do\-\_\-join\-\_\-tt}}
+\index{do\-\_\-join\-\_\-tt@{do\-\_\-join\-\_\-tt}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{do\-\_\-join\-\_\-tt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ndlog\-\_\-tuple}$\ast$ do\-\_\-join\-\_\-tt (
+\begin{DoxyParamCaption}
+\item[{{\bf ndlog\-\_\-tuple} $\ast$}]{t1, }
+\item[{{\bf ndlog\-\_\-tuple} $\ast$}]{t2, }
+\item[{deque$<$ {\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$}]{a1, }
+\item[{deque$<$ {\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$}]{a2}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a3af4d8ab83a55e09c7258f92b6ba3f6b}
+
+
+Definition at line 206 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a20885005d76692c36c0af920a9ca58c0}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!do\-\_\-project\-\_\-s@{do\-\_\-project\-\_\-s}}
+\index{do\-\_\-project\-\_\-s@{do\-\_\-project\-\_\-s}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{do\-\_\-project\-\_\-s}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ndlog\-\_\-state}$\ast$ do\-\_\-project\-\_\-s (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{{\bf ndlog\-\_\-state} $\ast$}]{s, }
+\item[{deque$<$ {\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$}]{old\-\_\-attrs, }
+\item[{deque$<$ {\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$}]{new\-\_\-attrs, }
+\item[{string}]{state\-Name}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a20885005d76692c36c0af920a9ca58c0}
+
+
+Definition at line 308 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_afffd163f6938cde2285249a95e7a1e38}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!do\-\_\-project\-\_\-t@{do\-\_\-project\-\_\-t}}
+\index{do\-\_\-project\-\_\-t@{do\-\_\-project\-\_\-t}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{do\-\_\-project\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ndlog\-\_\-tuple}$\ast$ do\-\_\-project\-\_\-t (
+\begin{DoxyParamCaption}
+\item[{{\bf ndlog\-\_\-tuple} $\ast$}]{t, }
+\item[{deque$<$ {\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$}]{old\-\_\-attrs, }
+\item[{deque$<$ {\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$}]{new\-\_\-attrs, }
+\item[{map$<$ string, string $>$ $\ast$}]{key\-\_\-attr}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_afffd163f6938cde2285249a95e7a1e38}
+
+
+Definition at line 374 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a4d7e8bda6fe9e0195da6c80951077f42}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!get\-\_\-tuple\-\_\-attr@{get\-\_\-tuple\-\_\-attr}}
+\index{get\-\_\-tuple\-\_\-attr@{get\-\_\-tuple\-\_\-attr}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{get\-\_\-tuple\-\_\-attr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ndlog\-\_\-tuple\-\_\-attribute}$\ast$ get\-\_\-tuple\-\_\-attr (
+\begin{DoxyParamCaption}
+\item[{{\bf ndlog\-\_\-tuple} $\ast$}]{t, }
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a4d7e8bda6fe9e0195da6c80951077f42}
+
+
+Definition at line 244 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a2e7b86789b841df071507f7d301b16ea}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!Get\-Attr\-Data@{Get\-Attr\-Data}}
+\index{Get\-Attr\-Data@{Get\-Attr\-Data}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{Get\-Attr\-Data}]{\setlength{\rightskip}{0pt plus 5cm}map$<$string, {\bf N\-D\-\_\-\-Value}$\ast$$>$ Get\-Attr\-Data (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{string}]{state\-Name, }
+\item[{string}]{attr\-Name}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a2e7b86789b841df071507f7d301b16ea}
+
+
+Definition at line 92 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a0ab06924c91416c26f84e4bf50c0a367}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!Get\-State@{Get\-State}}
+\index{Get\-State@{Get\-State}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{Get\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ndlog\-\_\-state}$\ast$ Get\-State (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{string}]{state\-Name}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a0ab06924c91416c26f84e4bf50c0a367}
+
+
+Definition at line 60 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a7ba40978a7c6904ea85168981299da89}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!has\-\_\-attr@{has\-\_\-attr}}
+\index{has\-\_\-attr@{has\-\_\-attr}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{has\-\_\-attr}]{\setlength{\rightskip}{0pt plus 5cm}bool has\-\_\-attr (
+\begin{DoxyParamCaption}
+\item[{deque$<$ {\bf ndlog\-\_\-tuple\-\_\-attribute} $\ast$ $>$ $\ast$}]{a, }
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a7ba40978a7c6904ea85168981299da89}
+
+
+Definition at line 255 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a1ef30aab6706faf1972bbc3ce2df03d3}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!is\-Recv\-Event@{is\-Recv\-Event}}
+\index{is\-Recv\-Event@{is\-Recv\-Event}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{is\-Recv\-Event}]{\setlength{\rightskip}{0pt plus 5cm}bool is\-Recv\-Event (
+\begin{DoxyParamCaption}
+\item[{{\bf ndlog\-\_\-tuple} $\ast$}]{arrival\-Tuple, }
+\item[{string}]{state\-Name}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a1ef30aab6706faf1972bbc3ce2df03d3}
+
+
+Definition at line 45 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a949644440d7002f63f57c4d249e936f6}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!Make\-Attribute\-List@{Make\-Attribute\-List}}
+\index{Make\-Attribute\-List@{Make\-Attribute\-List}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{Make\-Attribute\-List}]{\setlength{\rightskip}{0pt plus 5cm}deque$<${\bf ndlog\-\_\-tuple\-\_\-attribute}$\ast$$>$ Make\-Attribute\-List (
+\begin{DoxyParamCaption}
+\item[{const string}]{name\-List\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{list\-Len}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a949644440d7002f63f57c4d249e936f6}
+
+
+Definition at line 110 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_aadd03fb3a74f1cdecd87bbd2a18a6788}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!read\-Uint32@{read\-Uint32}}
+\index{read\-Uint32@{read\-Uint32}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{read\-Uint32}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint32\-\_\-t} read\-Uint32 (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_aadd03fb3a74f1cdecd87bbd2a18a6788}
+
+
+Definition at line 11 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_ad1f32e269267b0398216cc0f5b9d7f65}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!result\-\_\-to\-\_\-msu\-\_\-calls@{result\-\_\-to\-\_\-msu\-\_\-calls}}
+\index{result\-\_\-to\-\_\-msu\-\_\-calls@{result\-\_\-to\-\_\-msu\-\_\-calls}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{result\-\_\-to\-\_\-msu\-\_\-calls}]{\setlength{\rightskip}{0pt plus 5cm}void result\-\_\-to\-\_\-msu\-\_\-calls (
+\begin{DoxyParamCaption}
+\item[{{\bf ndlog\-\_\-state} $\ast$}]{result, }
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{sender, }
+\item[{struct {\bf msu\-\_\-msg\-\_\-hdr} $\ast$}]{hdr}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_ad1f32e269267b0398216cc0f5b9d7f65}
+
+
+Definition at line 421 of file helper-\/function.\-cc.
+
+\hypertarget{helper-function_8cc_a67e3619fb8bab96644f4a6d3edf8b95e}{\index{helper-\/function.\-cc@{helper-\/function.\-cc}!update\-Tuple\-Type@{update\-Tuple\-Type}}
+\index{update\-Tuple\-Type@{update\-Tuple\-Type}!helper-function.cc@{helper-\/function.\-cc}}
+\subsubsection[{update\-Tuple\-Type}]{\setlength{\rightskip}{0pt plus 5cm}void update\-Tuple\-Type (
+\begin{DoxyParamCaption}
+\item[{{\bf ndlog\-\_\-state} $\ast$}]{state, }
+\item[{enum {\bf tuple\-\_\-type}}]{tp\-Type}
+\end{DoxyParamCaption}
+)}}\label{helper-function_8cc_a67e3619fb8bab96644f4a6d3edf8b95e}
+
+
+Definition at line 402 of file helper-\/function.\-cc.
+

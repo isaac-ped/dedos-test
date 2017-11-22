@@ -1,0 +1,134 @@
+\hypertarget{_n_dvalue_8h}{\section{src/msus/ndlog/value/\-N\-Dvalue.h File Reference}
+\label{_n_dvalue_8h}\index{src/msus/ndlog/value/\-N\-Dvalue.\-h@{src/msus/ndlog/value/\-N\-Dvalue.\-h}}
+}
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include \char`\"{}N\-Dtype-\/ids.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}logging.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_n_d___value}{N\-D\-\_\-\-Value}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303}{Ndlog\-\_\-\-Operator} \hyperlink{_n_dvalue_8h_a7b873269dfd1a125f4064e8ea873f235}{Ndlog\-\_\-\-Operator}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303}{Ndlog\-\_\-\-Operator} \{ \\*
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a2213dafed725dae6589a8250725e5ef3}{N\-D\-\_\-\-N\-O\-\_\-\-O\-P} = 0, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a158dc2b854139b242316e7594028f772}{N\-D\-\_\-\-P\-L\-U\-S}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a9bdcff5626c4bd04dbbdcb66f94e644d}{N\-D\-\_\-\-M\-I\-N\-U\-S}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a736aa2b782740ec8ee2f45ed80a0603e}{N\-D\-\_\-\-T\-I\-M\-E\-S}, 
+\\*
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a393272f37c2b4cddc8a3e7851b4bc214}{N\-D\-\_\-\-D\-I\-V\-I\-D\-E}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ae4f2bfd097e8f8c305eb87d5d8be22da}{N\-D\-\_\-\-M\-O\-D\-U\-L\-U\-S}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ace6f2ad57414668a40ad99a7975a39a3}{N\-D\-\_\-\-L\-S\-H\-I\-F\-T}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a964a08cfc1112d0d976bc526f9766682}{N\-D\-\_\-\-R\-S\-H\-I\-F\-T}, 
+\\*
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ae7222cc51fd3da9c34e8e5ade8abd5d2}{N\-D\-\_\-\-N\-O\-T}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a2c5d958a768835926379c3aa0afa1945}{N\-D\-\_\-\-A\-N\-D}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a90c9ea23bd38dc6f3c2ceeb8524a6ccb}{N\-D\-\_\-\-O\-R}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a17382488bf992ee361cf8cbbbcb364e9}{N\-D\-\_\-\-E\-Q}, 
+\\*
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a11052a76295fb48d56af1b0156b8744a}{N\-D\-\_\-\-N\-E\-Q}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a1d678e8ba7b3d7aa5a19a05b842759c1}{N\-D\-\_\-\-G\-T}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a62b8af87aa09a0e5292109297e5c53ea}{N\-D\-\_\-\-L\-T}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a2cfc2a097747ad42e254b497cc4d0456}{N\-D\-\_\-\-G\-T\-E}, 
+\\*
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ad039cf9fddb1a1bd5a4f2c8d94de221c}{N\-D\-\_\-\-L\-T\-E}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a0aaf50f2f79fee4519e7916c52a4c3a4}{N\-D\-\_\-\-I\-N\-\_\-\-R\-A\-N\-G\-E}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a3d9e84a3f53d074ff56ac80b694a5977}{N\-D\-\_\-\-B\-I\-T\-\_\-\-X\-O\-R}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a1bb854432da214084822f58e5dbacf96}{N\-D\-\_\-\-B\-I\-T\-\_\-\-A\-N\-D}, 
+\\*
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a3c99473b248e7475708308d7669a240e}{N\-D\-\_\-\-B\-I\-T\-\_\-\-O\-R}, 
+\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a845356c2ce61e44b44180aa7520604a9}{N\-D\-\_\-\-B\-I\-T\-\_\-\-N\-O\-T}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{_n_dvalue_8h_a2136fef80f2d4c1c9f826bdeb66844e3}{operator$<$$<$} (ostream \&os, const \hyperlink{class_n_d___value}{N\-D\-\_\-\-Value} $\ast$value)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{_n_dvalue_8h_a7b873269dfd1a125f4064e8ea873f235}{\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!Ndlog\-\_\-\-Operator@{Ndlog\-\_\-\-Operator}}
+\index{Ndlog\-\_\-\-Operator@{Ndlog\-\_\-\-Operator}!NDvalue.h@{N\-Dvalue.\-h}}
+\subsubsection[{Ndlog\-\_\-\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf Ndlog\-\_\-\-Operator}  {\bf Ndlog\-\_\-\-Operator}}}\label{_n_dvalue_8h_a7b873269dfd1a125f4064e8ea873f235}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303}{\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!Ndlog\-\_\-\-Operator@{Ndlog\-\_\-\-Operator}}
+\index{Ndlog\-\_\-\-Operator@{Ndlog\-\_\-\-Operator}!NDvalue.h@{N\-Dvalue.\-h}}
+\subsubsection[{Ndlog\-\_\-\-Operator}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ndlog\-\_\-\-Operator}}}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\-D\-\_\-\-N\-O\-\_\-\-O\-P@{N\-D\-\_\-\-N\-O\-\_\-\-O\-P}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-N\-O\-\_\-\-O\-P@{N\-D\-\_\-\-N\-O\-\_\-\-O\-P}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a2213dafed725dae6589a8250725e5ef3}{N\-D\-\_\-\-N\-O\-\_\-\-O\-P}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a2213dafed725dae6589a8250725e5ef3}
+}]\index{N\-D\-\_\-\-P\-L\-U\-S@{N\-D\-\_\-\-P\-L\-U\-S}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-P\-L\-U\-S@{N\-D\-\_\-\-P\-L\-U\-S}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a158dc2b854139b242316e7594028f772}{N\-D\-\_\-\-P\-L\-U\-S}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a158dc2b854139b242316e7594028f772}
+}]\index{N\-D\-\_\-\-M\-I\-N\-U\-S@{N\-D\-\_\-\-M\-I\-N\-U\-S}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-M\-I\-N\-U\-S@{N\-D\-\_\-\-M\-I\-N\-U\-S}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a9bdcff5626c4bd04dbbdcb66f94e644d}{N\-D\-\_\-\-M\-I\-N\-U\-S}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a9bdcff5626c4bd04dbbdcb66f94e644d}
+}]\index{N\-D\-\_\-\-T\-I\-M\-E\-S@{N\-D\-\_\-\-T\-I\-M\-E\-S}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-T\-I\-M\-E\-S@{N\-D\-\_\-\-T\-I\-M\-E\-S}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a736aa2b782740ec8ee2f45ed80a0603e}{N\-D\-\_\-\-T\-I\-M\-E\-S}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a736aa2b782740ec8ee2f45ed80a0603e}
+}]\index{N\-D\-\_\-\-D\-I\-V\-I\-D\-E@{N\-D\-\_\-\-D\-I\-V\-I\-D\-E}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-D\-I\-V\-I\-D\-E@{N\-D\-\_\-\-D\-I\-V\-I\-D\-E}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a393272f37c2b4cddc8a3e7851b4bc214}{N\-D\-\_\-\-D\-I\-V\-I\-D\-E}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a393272f37c2b4cddc8a3e7851b4bc214}
+}]\index{N\-D\-\_\-\-M\-O\-D\-U\-L\-U\-S@{N\-D\-\_\-\-M\-O\-D\-U\-L\-U\-S}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-M\-O\-D\-U\-L\-U\-S@{N\-D\-\_\-\-M\-O\-D\-U\-L\-U\-S}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ae4f2bfd097e8f8c305eb87d5d8be22da}{N\-D\-\_\-\-M\-O\-D\-U\-L\-U\-S}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ae4f2bfd097e8f8c305eb87d5d8be22da}
+}]\index{N\-D\-\_\-\-L\-S\-H\-I\-F\-T@{N\-D\-\_\-\-L\-S\-H\-I\-F\-T}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-L\-S\-H\-I\-F\-T@{N\-D\-\_\-\-L\-S\-H\-I\-F\-T}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ace6f2ad57414668a40ad99a7975a39a3}{N\-D\-\_\-\-L\-S\-H\-I\-F\-T}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ace6f2ad57414668a40ad99a7975a39a3}
+}]\index{N\-D\-\_\-\-R\-S\-H\-I\-F\-T@{N\-D\-\_\-\-R\-S\-H\-I\-F\-T}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-R\-S\-H\-I\-F\-T@{N\-D\-\_\-\-R\-S\-H\-I\-F\-T}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a964a08cfc1112d0d976bc526f9766682}{N\-D\-\_\-\-R\-S\-H\-I\-F\-T}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a964a08cfc1112d0d976bc526f9766682}
+}]\index{N\-D\-\_\-\-N\-O\-T@{N\-D\-\_\-\-N\-O\-T}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-N\-O\-T@{N\-D\-\_\-\-N\-O\-T}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ae7222cc51fd3da9c34e8e5ade8abd5d2}{N\-D\-\_\-\-N\-O\-T}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ae7222cc51fd3da9c34e8e5ade8abd5d2}
+}]\index{N\-D\-\_\-\-A\-N\-D@{N\-D\-\_\-\-A\-N\-D}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-A\-N\-D@{N\-D\-\_\-\-A\-N\-D}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a2c5d958a768835926379c3aa0afa1945}{N\-D\-\_\-\-A\-N\-D}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a2c5d958a768835926379c3aa0afa1945}
+}]\index{N\-D\-\_\-\-O\-R@{N\-D\-\_\-\-O\-R}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-O\-R@{N\-D\-\_\-\-O\-R}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a90c9ea23bd38dc6f3c2ceeb8524a6ccb}{N\-D\-\_\-\-O\-R}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a90c9ea23bd38dc6f3c2ceeb8524a6ccb}
+}]\index{N\-D\-\_\-\-E\-Q@{N\-D\-\_\-\-E\-Q}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-E\-Q@{N\-D\-\_\-\-E\-Q}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a17382488bf992ee361cf8cbbbcb364e9}{N\-D\-\_\-\-E\-Q}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a17382488bf992ee361cf8cbbbcb364e9}
+}]\index{N\-D\-\_\-\-N\-E\-Q@{N\-D\-\_\-\-N\-E\-Q}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-N\-E\-Q@{N\-D\-\_\-\-N\-E\-Q}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a11052a76295fb48d56af1b0156b8744a}{N\-D\-\_\-\-N\-E\-Q}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a11052a76295fb48d56af1b0156b8744a}
+}]\index{N\-D\-\_\-\-G\-T@{N\-D\-\_\-\-G\-T}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-G\-T@{N\-D\-\_\-\-G\-T}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a1d678e8ba7b3d7aa5a19a05b842759c1}{N\-D\-\_\-\-G\-T}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a1d678e8ba7b3d7aa5a19a05b842759c1}
+}]\index{N\-D\-\_\-\-L\-T@{N\-D\-\_\-\-L\-T}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-L\-T@{N\-D\-\_\-\-L\-T}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a62b8af87aa09a0e5292109297e5c53ea}{N\-D\-\_\-\-L\-T}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a62b8af87aa09a0e5292109297e5c53ea}
+}]\index{N\-D\-\_\-\-G\-T\-E@{N\-D\-\_\-\-G\-T\-E}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-G\-T\-E@{N\-D\-\_\-\-G\-T\-E}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a2cfc2a097747ad42e254b497cc4d0456}{N\-D\-\_\-\-G\-T\-E}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a2cfc2a097747ad42e254b497cc4d0456}
+}]\index{N\-D\-\_\-\-L\-T\-E@{N\-D\-\_\-\-L\-T\-E}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-L\-T\-E@{N\-D\-\_\-\-L\-T\-E}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ad039cf9fddb1a1bd5a4f2c8d94de221c}{N\-D\-\_\-\-L\-T\-E}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303ad039cf9fddb1a1bd5a4f2c8d94de221c}
+}]\index{N\-D\-\_\-\-I\-N\-\_\-\-R\-A\-N\-G\-E@{N\-D\-\_\-\-I\-N\-\_\-\-R\-A\-N\-G\-E}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-I\-N\-\_\-\-R\-A\-N\-G\-E@{N\-D\-\_\-\-I\-N\-\_\-\-R\-A\-N\-G\-E}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a0aaf50f2f79fee4519e7916c52a4c3a4}{N\-D\-\_\-\-I\-N\-\_\-\-R\-A\-N\-G\-E}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a0aaf50f2f79fee4519e7916c52a4c3a4}
+}]\index{N\-D\-\_\-\-B\-I\-T\-\_\-\-X\-O\-R@{N\-D\-\_\-\-B\-I\-T\-\_\-\-X\-O\-R}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-B\-I\-T\-\_\-\-X\-O\-R@{N\-D\-\_\-\-B\-I\-T\-\_\-\-X\-O\-R}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a3d9e84a3f53d074ff56ac80b694a5977}{N\-D\-\_\-\-B\-I\-T\-\_\-\-X\-O\-R}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a3d9e84a3f53d074ff56ac80b694a5977}
+}]\index{N\-D\-\_\-\-B\-I\-T\-\_\-\-A\-N\-D@{N\-D\-\_\-\-B\-I\-T\-\_\-\-A\-N\-D}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-B\-I\-T\-\_\-\-A\-N\-D@{N\-D\-\_\-\-B\-I\-T\-\_\-\-A\-N\-D}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a1bb854432da214084822f58e5dbacf96}{N\-D\-\_\-\-B\-I\-T\-\_\-\-A\-N\-D}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a1bb854432da214084822f58e5dbacf96}
+}]\index{N\-D\-\_\-\-B\-I\-T\-\_\-\-O\-R@{N\-D\-\_\-\-B\-I\-T\-\_\-\-O\-R}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-B\-I\-T\-\_\-\-O\-R@{N\-D\-\_\-\-B\-I\-T\-\_\-\-O\-R}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a3c99473b248e7475708308d7669a240e}{N\-D\-\_\-\-B\-I\-T\-\_\-\-O\-R}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a3c99473b248e7475708308d7669a240e}
+}]\index{N\-D\-\_\-\-B\-I\-T\-\_\-\-N\-O\-T@{N\-D\-\_\-\-B\-I\-T\-\_\-\-N\-O\-T}!N\-Dvalue.\-h@{N\-Dvalue.\-h}}\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!N\-D\-\_\-\-B\-I\-T\-\_\-\-N\-O\-T@{N\-D\-\_\-\-B\-I\-T\-\_\-\-N\-O\-T}}\item[{\em 
+\hypertarget{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a845356c2ce61e44b44180aa7520604a9}{N\-D\-\_\-\-B\-I\-T\-\_\-\-N\-O\-T}\label{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303a845356c2ce61e44b44180aa7520604a9}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 8 of file N\-Dvalue.\-h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{_n_dvalue_8h_a2136fef80f2d4c1c9f826bdeb66844e3}{\index{N\-Dvalue.\-h@{N\-Dvalue.\-h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!NDvalue.h@{N\-Dvalue.\-h}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const {\bf N\-D\-\_\-\-Value} $\ast$}]{value}
+\end{DoxyParamCaption}
+)}}\label{_n_dvalue_8h_a2136fef80f2d4c1c9f826bdeb66844e3}
+
+
+Definition at line 25 of file N\-Dvalue.\-cc.
+

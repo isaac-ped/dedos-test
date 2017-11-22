@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - msus/webserver/read_msu.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">msus/webserver</a> - read_msu.c<span style="font-size: 80%;"> (source / <a href="read_msu.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">67</td>
+            <td class="headerCovTableEntry">87</td>
+            <td class="headerCovTableEntryMed">77.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-11-22</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;webserver/read_msu.h&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;webserver/http_msu.h&quot;
+<span class="lineNum">       3 </span>            : #include &quot;webserver/sslops.h&quot;
+<span class="lineNum">       4 </span>            : #include &quot;socket_msu.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;webserver/connection-handler.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;routing_strategies.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;logging.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;msu_state.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;local_msu.h&quot;
+<span class="lineNum">      10 </span>            : #include &quot;msu_message.h&quot;
+<span class="lineNum">      11 </span>            : #include &quot;routing.h&quot;
+<span class="lineNum">      12 </span>            : #include &quot;local_files.h&quot;
+<span class="lineNum">      13 </span>            : #include &quot;msu_calls.h&quot;
+<span class="lineNum">      14 </span>            : #include &quot;unused_def.h&quot;
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span>            : #include &lt;signal.h&gt;
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span>            : struct ws_read_state {
+<span class="lineNum">      19 </span>            :     int use_ssl;
+<a name="20"><span class="lineNum">      20 </span>            : };</a>
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span><span class="lineCov">         25 : static int handle_read(struct read_state *read_state,</span>
+<span class="lineNum">      23 </span>            :                        struct ws_read_state *msu_state,
+<span class="lineNum">      24 </span>            :                        struct local_msu *self,
+<span class="lineNum">      25 </span>            :                        struct msu_msg *msg) {
+<span class="lineNum">      26 </span><span class="lineCov">         25 :     log(LOG_WEBSERVER_READ, &quot;Attempting read from %p&quot;, read_state);</span>
+<span class="lineNum">      27 </span><span class="lineCov">         25 :     int rtn = read_request(read_state);</span>
+<span class="lineNum">      28 </span><span class="lineCov">         25 :     if (rtn &amp; (WS_INCOMPLETE_WRITE | WS_INCOMPLETE_READ)) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">         14 :         read_state-&gt;conn.status = CON_READING;</span>
+<span class="lineNum">      30 </span><span class="lineCov">         14 :         log(LOG_WEBSERVER_READ, &quot;Read incomplete. Re-enabling (fd: %d)&quot;, read_state-&gt;conn.fd);</span>
+<span class="lineNum">      31 </span><span class="lineCov">         14 :         msu_monitor_fd(read_state-&gt;conn.fd, RTN_TO_EVT(rtn), self, &amp;msg-&gt;hdr);</span>
+<span class="lineNum">      32 </span><span class="lineCov">         14 :         free(msg-&gt;data);</span>
+<span class="lineNum">      33 </span><span class="lineCov">         14 :         return 0;</span>
+<span class="lineNum">      34 </span><span class="lineCov">         11 :     } else if (rtn &amp; WS_ERROR) {</span>
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :         close_connection(&amp;read_state-&gt;conn);</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :         read_state-&gt;req_len = -1;</span>
+<span class="lineNum">      37 </span>            :         // Send the failure message (req_len = -1) to http
+<span class="lineNum">      38 </span>            :     } else {
+<span class="lineNum">      39 </span><span class="lineCov">         11 :         log(LOG_WEBSERVER_READ, &quot;Read %s&quot;, read_state-&gt;req);</span>
+<span class="lineNum">      40 </span>            :     }
+<span class="lineNum">      41 </span><span class="lineCov">         11 :     struct read_state *out = malloc(sizeof(*out));</span>
+<span class="lineNum">      42 </span><span class="lineCov">         11 :     memcpy(out, read_state, sizeof(*read_state));</span>
+<span class="lineNum">      43 </span><span class="lineCov">         11 :     msu_free_state(self, &amp;msg-&gt;hdr.key);</span>
+<span class="lineNum">      44 </span><span class="lineCov">         11 :     free(msg-&gt;data);</span>
+<span class="lineNum">      45 </span><span class="lineCov">         11 :     call_msu_type(self, &amp;WEBSERVER_HTTP_MSU_TYPE, &amp;msg-&gt;hdr, sizeof(*out), out);</span>
+<span class="lineNum">      46 </span><span class="lineCov">         11 :     return 0;</span>
+<a name="47"><span class="lineNum">      47 </span>            : }</a>
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span><span class="lineCov">         26 : static int handle_accept(struct read_state *read_state,</span>
+<span class="lineNum">      50 </span>            :                          struct ws_read_state *msu_state,
+<span class="lineNum">      51 </span>            :                          struct local_msu *self,
+<span class="lineNum">      52 </span>            :                          struct msu_msg *msg) {
+<span class="lineNum">      53 </span><span class="lineCov">         26 :     int rtn = accept_connection(&amp;read_state-&gt;conn, msu_state-&gt;use_ssl);</span>
+<span class="lineNum">      54 </span><span class="lineCov">         26 :     if (rtn &amp; WS_COMPLETE) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">         13 :         rtn = handle_read(read_state, msu_state, self, msg);</span>
+<span class="lineNum">      56 </span><span class="lineCov">         13 :         return rtn;</span>
+<span class="lineNum">      57 </span><span class="lineCov">         13 :     } else if (rtn &amp; WS_ERROR) {</span>
+<span class="lineNum">      58 </span><span class="lineNoCov">          0 :         close_connection(&amp;read_state-&gt;conn);</span>
+<span class="lineNum">      59 </span><span class="lineNoCov">          0 :         msu_free_state(self, &amp;msg-&gt;hdr.key);</span>
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :         free(msg-&gt;data);</span>
+<span class="lineNum">      61 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      62 </span>            :     } else {
+<span class="lineNum">      63 </span><span class="lineCov">         13 :         read_state-&gt;conn.status = CON_SSL_CONNECTING;</span>
+<span class="lineNum">      64 </span><span class="lineCov">         13 :         return msu_monitor_fd(read_state-&gt;conn.fd, RTN_TO_EVT(rtn), self, &amp;msg-&gt;hdr);</span>
+<span class="lineNum">      65 </span>            :     }
+<a name="66"><span class="lineNum">      66 </span>            : }</a>
+<span class="lineNum">      67 </span>            : 
+<span class="lineNum">      68 </span><span class="lineCov">         38 : static int read_http_request(struct local_msu *self,</span>
+<span class="lineNum">      69 </span>            :                              struct msu_msg *msg) {
+<span class="lineNum">      70 </span><span class="lineCov">         38 :     struct ws_read_state *msu_state = self-&gt;msu_state;</span>
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span>            :     struct connection conn_in;
+<span class="lineNum">      73 </span><span class="lineCov">         38 :     int sender_type_id = msu_msg_sender_type(&amp;msg-&gt;hdr.provinance);</span>
+<span class="lineNum">      74 </span><span class="lineCov">         38 :     switch (sender_type_id) {</span>
+<span class="lineNum">      75 </span>            :         case SOCKET_MSU_TYPE_ID:;
+<span class="lineNum">      76 </span><span class="lineCov">         36 :             struct socket_msg *msg_in = msg-&gt;data;</span>
+<span class="lineNum">      77 </span><span class="lineCov">         36 :             init_connection(&amp;conn_in, msg_in-&gt;fd);</span>
+<span class="lineNum">      78 </span><span class="lineCov">         36 :             break;</span>
+<span class="lineNum">      79 </span>            :         case WEBSERVER_HTTP_MSU_TYPE_ID:
+<span class="lineNum">      80 </span><span class="lineCov">          2 :             log(LOG_WEBSERVER_READ, &quot;Got back read msg %u&quot;, msg-&gt;hdr.key.id);</span>
+<span class="lineNum">      81 </span><span class="lineCov">          2 :             conn_in = *(struct connection*)msg-&gt;data;</span>
+<span class="lineNum">      82 </span><span class="lineCov">          2 :             break;</span>
+<span class="lineNum">      83 </span>            :         default:
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :             log_error(&quot;Unknown sender MSU type ID: %d&quot;, sender_type_id);</span>
+<span class="lineNum">      85 </span><span class="lineNoCov">          0 :             return -1;</span>
+<span class="lineNum">      86 </span>            :     }
+<span class="lineNum">      87 </span>            : 
+<span class="lineNum">      88 </span><span class="lineCov">         38 :     size_t size = -1;</span>
+<span class="lineNum">      89 </span><span class="lineCov">         38 :     struct read_state *read_state = msu_get_state(self, &amp;msg-&gt;hdr.key, &amp;size);</span>
+<span class="lineNum">      90 </span><span class="lineCov">         38 :     if (read_state == NULL) {</span>
+<span class="lineNum">      91 </span><span class="lineCov">         17 :         read_state = msu_init_state(self, &amp;msg-&gt;hdr.key, sizeof(*read_state));</span>
+<span class="lineNum">      92 </span><span class="lineCov">         17 :         init_read_state(read_state, &amp;conn_in);</span>
+<span class="lineNum">      93 </span>            :     } else {
+<span class="lineNum">      94 </span><span class="lineCov">         21 :         log(LOG_WEBSERVER_READ, &quot;Retrieved read ptr %p&quot;, read_state);</span>
+<span class="lineNum">      95 </span>            :     }
+<span class="lineNum">      96 </span><span class="lineCov">         38 :     if (read_state-&gt;conn.fd != conn_in.fd) {</span>
+<span class="lineNum">      97 </span><span class="lineNoCov">          0 :         log_error(&quot;Got non-matching FDs! state: %d vs input: %d&quot;, read_state-&gt;conn.fd, conn_in.fd);</span>
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      99 </span>            :     }
+<span class="lineNum">     100 </span>            : 
+<span class="lineNum">     101 </span><span class="lineCov">         38 :     switch (read_state-&gt;conn.status) {</span>
+<span class="lineNum">     102 </span>            :         case NIL:
+<span class="lineNum">     103 </span>            :         case NO_CONNECTION:
+<span class="lineNum">     104 </span>            :         case CON_ACCEPTED:
+<span class="lineNum">     105 </span>            :         case CON_SSL_CONNECTING:
+<span class="lineNum">     106 </span><span class="lineCov">         26 :             return handle_accept(read_state, msu_state, self, msg);</span>
+<span class="lineNum">     107 </span>            :         case CON_READING:
+<span class="lineNum">     108 </span>            :             // TODO: I think it may never get here...
+<span class="lineNum">     109 </span><span class="lineCov">         12 :             return handle_read(read_state, msu_state, self, msg);</span>
+<span class="lineNum">     110 </span>            :         default:
+<span class="lineNum">     111 </span><span class="lineNoCov">          0 :             log_error(&quot;Received unknown packet status: %d&quot;, read_state-&gt;conn.status);</span>
+<span class="lineNum">     112 </span><span class="lineNoCov">          0 :             return -1;</span>
+<span class="lineNum">     113 </span>            :     }
+<span class="lineNum">     114 </span>            : }
+<span class="lineNum">     115 </span>            : 
+<a name="116"><span class="lineNum">     116 </span>            : #define SSL_INIT_CMD &quot;SSL&quot;</a>
+<span class="lineNum">     117 </span>            : 
+<span class="lineNum">     118 </span><span class="lineCov">         22 : static int ws_read_init(struct local_msu *self, struct msu_init_data *data) {</span>
+<span class="lineNum">     119 </span><span class="lineCov">         22 :     struct ws_read_state *ws_state = malloc(sizeof(*ws_state));</span>
+<span class="lineNum">     120 </span>            : 
+<span class="lineNum">     121 </span><span class="lineCov">         22 :     char *init_cmd = data-&gt;init_data;</span>
+<span class="lineNum">     122 </span>            : 
+<span class="lineNum">     123 </span><span class="lineCov">         22 :     if (init_cmd == NULL) {</span>
+<span class="lineNum">     124 </span><span class="lineNoCov">          0 :         log_info(&quot;Initializing NON-SSL webserver-reading MSU&quot;);</span>
+<span class="lineNum">     125 </span><span class="lineNoCov">          0 :         ws_state-&gt;use_ssl = 0;</span>
+<span class="lineNum">     126 </span>            :     }
+<span class="lineNum">     127 </span><span class="lineCov">         22 :     if (strncasecmp(init_cmd, SSL_INIT_CMD, sizeof(SSL_INIT_CMD)) == 0) {</span>
+<span class="lineNum">     128 </span><span class="lineCov">         22 :         log_info(&quot;Initializing SSL webserver-reading MSU&quot;);</span>
+<span class="lineNum">     129 </span><span class="lineCov">         22 :         ws_state-&gt;use_ssl = 1;</span>
+<span class="lineNum">     130 </span>            :     } else {
+<span class="lineNum">     131 </span><span class="lineNoCov">          0 :         log_info(&quot;Initializing SSL webserver-reading MSU anyway&quot;);</span>
+<span class="lineNum">     132 </span><span class="lineNoCov">          0 :         ws_state-&gt;use_ssl = 1;</span>
+<span class="lineNum">     133 </span>            :     }
+<span class="lineNum">     134 </span>            : 
+<span class="lineNum">     135 </span><span class="lineCov">         22 :     self-&gt;msu_state = (void*)ws_state;</span>
+<span class="lineNum">     136 </span><span class="lineCov">         22 :     return 0;</span>
+<a name="137"><span class="lineNum">     137 </span>            : }</a>
+<span class="lineNum">     138 </span>            : 
+<span class="lineNum">     139 </span><span class="lineCov">         22 : static void ws_read_destroy(struct local_msu *self) {</span>
+<span class="lineNum">     140 </span><span class="lineCov">         22 :     free(self-&gt;msu_state);</span>
+<span class="lineNum">     141 </span><span class="lineCov">         22 : }</span>
+<a name="142"><span class="lineNum">     142 </span>            : </a>
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span><span class="lineCov">         23 : static int init_ssl_ctx(struct msu_type UNUSED *type) {</span>
+<span class="lineNum">     145 </span><span class="lineCov">         23 :     init_ssl_locks();</span>
+<span class="lineNum">     146 </span><span class="lineCov">         23 :     if (init_ssl_context() != 0) {</span>
+<span class="lineNum">     147 </span><span class="lineNoCov">          0 :         log_critical(&quot;Error intiializing SSL context&quot;);</span>
+<span class="lineNum">     148 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">     149 </span>            :     }
+<span class="lineNum">     150 </span>            : 
+<span class="lineNum">     151 </span>            :     char pem_file[256];
+<span class="lineNum">     152 </span><span class="lineCov">         23 :     get_local_file(pem_file, &quot;mycert.pem&quot;);</span>
+<span class="lineNum">     153 </span><span class="lineCov">         23 :     if (load_ssl_certificate(pem_file, pem_file) != 0) {</span>
+<span class="lineNum">     154 </span><span class="lineNoCov">          0 :         log_error(&quot;Error loading SSL cert %s&quot;, pem_file);</span>
+<span class="lineNum">     155 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">     156 </span>            :     }
+<span class="lineNum">     157 </span>            : 
+<span class="lineNum">     158 </span><span class="lineCov">         23 :     signal(SIGPIPE, SIG_IGN);</span>
+<span class="lineNum">     159 </span>            : 
+<span class="lineNum">     160 </span><span class="lineCov">         23 :     return 0;</span>
+<a name="161"><span class="lineNum">     161 </span>            : }</a>
+<span class="lineNum">     162 </span>            : 
+<span class="lineNum">     163 </span><span class="lineCov">         23 : static void destroy_ssl_ctx(struct msu_type UNUSED *type) {</span>
+<span class="lineNum">     164 </span><span class="lineCov">         23 :     kill_ssl_locks();</span>
+<span class="lineNum">     165 </span><span class="lineCov">         23 : }</span>
+<span class="lineNum">     166 </span>            : 
+<span class="lineNum">     167 </span>            : struct msu_type WEBSERVER_READ_MSU_TYPE = {
+<span class="lineNum">     168 </span>            :     .name = &quot;Webserver_read_MSU&quot;,
+<span class="lineNum">     169 </span>            :     .id = WEBSERVER_READ_MSU_TYPE_ID,
+<span class="lineNum">     170 </span>            :     .init_type = init_ssl_ctx,
+<span class="lineNum">     171 </span>            :     .destroy_type = destroy_ssl_ctx,
+<span class="lineNum">     172 </span>            :     .init = ws_read_init,
+<span class="lineNum">     173 </span>            :     .destroy = ws_read_destroy,
+<span class="lineNum">     174 </span>            :     .route = route_to_origin_runtime,
+<span class="lineNum">     175 </span>            :     .receive = read_http_request
+<span class="lineNum">     176 </span>            : };
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

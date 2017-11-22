@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - msus/webserver/write_msu.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">msus/webserver</a> - write_msu.c<span style="font-size: 80%;"> (source / <a href="write_msu.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">31</td>
+            <td class="headerCovTableEntryLo">74.2 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-11-22</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;webserver/write_msu.h&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;socket_msu.h&quot;
+<span class="lineNum">       3 </span>            : #include &quot;webserver/connection-handler.h&quot;
+<span class="lineNum">       4 </span>            : #include &quot;msu_state.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;logging.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;routing_strategies.h&quot;
+<a name="7"><span class="lineNum">       7 </span>            : #include &quot;profiler.h&quot;</a>
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span><span class="lineCov">          7 : static int write_http_response(struct local_msu *self,</span>
+<span class="lineNum">      10 </span>            :                                struct msu_msg *msg) {
+<span class="lineNum">      11 </span><span class="lineCov">          7 :     struct response_state *resp_in = msg-&gt;data;</span>
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span><span class="lineCov">          7 :     size_t size = 0;</span>
+<span class="lineNum">      14 </span><span class="lineCov">          7 :     struct response_state *resp = msu_get_state(self, &amp;msg-&gt;hdr.key, &amp;size);</span>
+<span class="lineNum">      15 </span><span class="lineCov">          7 :     if (resp == NULL) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">          7 :         resp = msu_init_state(self, &amp;msg-&gt;hdr.key, sizeof(*resp));</span>
+<span class="lineNum">      17 </span><span class="lineCov">          7 :         memcpy(resp, resp_in, sizeof(*resp_in));</span>
+<span class="lineNum">      18 </span>            :     }
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span><span class="lineCov">          7 :     if (resp-&gt;conn.status == CON_ERROR) {</span>
+<span class="lineNum">      21 </span><span class="lineCov">          1 :         msu_remove_fd_monitor(resp-&gt;conn.fd);</span>
+<span class="lineNum">      22 </span><span class="lineCov">          1 :         close_connection(&amp;resp-&gt;conn);</span>
+<span class="lineNum">      23 </span><span class="lineCov">          1 :         msu_free_state(self, &amp;msg-&gt;hdr.key);</span>
+<span class="lineNum">      24 </span><span class="lineCov">          1 :         free(resp_in);</span>
+<span class="lineNum">      25 </span><span class="lineCov">          1 :         return 0;</span>
+<span class="lineNum">      26 </span>            :     }
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span><span class="lineCov">          6 :     int rtn = write_response(resp);</span>
+<span class="lineNum">      29 </span><span class="lineCov">          6 :     if (rtn &amp; WS_ERROR) {</span>
+<span class="lineNum">      30 </span><span class="lineNoCov">          0 :         msu_remove_fd_monitor(resp-&gt;conn.fd);</span>
+<span class="lineNum">      31 </span><span class="lineNoCov">          0 :         close_connection(&amp;resp-&gt;conn);</span>
+<span class="lineNum">      32 </span><span class="lineNoCov">          0 :         msu_free_state(self, &amp;msg-&gt;hdr.key);</span>
+<span class="lineNum">      33 </span><span class="lineNoCov">          0 :         free(resp_in);</span>
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      35 </span><span class="lineCov">          6 :     } else if (rtn &amp; (WS_INCOMPLETE_READ | WS_INCOMPLETE_WRITE)) {</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :         rtn = msu_monitor_fd(resp-&gt;conn.fd, RTN_TO_EVT(rtn), self, &amp;msg-&gt;hdr);</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :         free(resp_in);</span>
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :         return rtn;</span>
+<span class="lineNum">      39 </span>            :     } else {
+<span class="lineNum">      40 </span>            :         PROFILE_EVENT(msg-&gt;hdr, PROF_DEDOS_EXIT);
+<span class="lineNum">      41 </span><span class="lineCov">          6 :         msu_remove_fd_monitor(resp-&gt;conn.fd);</span>
+<span class="lineNum">      42 </span><span class="lineCov">          6 :         close_connection(&amp;resp-&gt;conn);</span>
+<span class="lineNum">      43 </span><span class="lineCov">          6 :         log(LOG_WEBSERVER_WRITE, &quot;Successful connection to fd %d closed&quot;,</span>
+<span class="lineNum">      44 </span>            :                    resp-&gt;conn.fd);
+<span class="lineNum">      45 </span><span class="lineCov">          6 :         log(LOG_WEBSERVER_WRITE, &quot;Wrote request: %s&quot;, resp-&gt;resp);</span>
+<span class="lineNum">      46 </span><span class="lineCov">          6 :         msu_free_state(self, &amp;msg-&gt;hdr.key);</span>
+<span class="lineNum">      47 </span><span class="lineCov">          6 :         free(resp_in);</span>
+<span class="lineNum">      48 </span><span class="lineCov">          6 :         return 0;</span>
+<span class="lineNum">      49 </span>            :     }
+<span class="lineNum">      50 </span>            : }
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            : struct msu_type WEBSERVER_WRITE_MSU_TYPE = {
+<span class="lineNum">      53 </span>            :     .name = &quot;Webserver_write_MSU&quot;,
+<span class="lineNum">      54 </span>            :     .id = WEBSERVER_WRITE_MSU_TYPE_ID,
+<span class="lineNum">      55 </span>            :     .receive = write_http_response,
+<span class="lineNum">      56 </span>            :     .route = route_to_origin_runtime
+<span class="lineNum">      57 </span>            : };
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

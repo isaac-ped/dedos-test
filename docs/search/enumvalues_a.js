@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['nd_5fand',['ND_AND',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a2c5d958a768835926379c3aa0afa1945',1,'NDvalue.h']]],
+  ['nd_5fbit_5fand',['ND_BIT_AND',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a1bb854432da214084822f58e5dbacf96',1,'NDvalue.h']]],
+  ['nd_5fbit_5fnot',['ND_BIT_NOT',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a845356c2ce61e44b44180aa7520604a9',1,'NDvalue.h']]],
+  ['nd_5fbit_5for',['ND_BIT_OR',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a3c99473b248e7475708308d7669a240e',1,'NDvalue.h']]],
+  ['nd_5fbit_5fxor',['ND_BIT_XOR',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a3d9e84a3f53d074ff56ac80b694a5977',1,'NDvalue.h']]],
+  ['nd_5fdivide',['ND_DIVIDE',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a393272f37c2b4cddc8a3e7851b4bc214',1,'NDvalue.h']]],
+  ['nd_5feq',['ND_EQ',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a17382488bf992ee361cf8cbbbcb364e9',1,'NDvalue.h']]],
+  ['nd_5fgt',['ND_GT',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a1d678e8ba7b3d7aa5a19a05b842759c1',1,'NDvalue.h']]],
+  ['nd_5fgte',['ND_GTE',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a2cfc2a097747ad42e254b497cc4d0456',1,'NDvalue.h']]],
+  ['nd_5fin_5frange',['ND_IN_RANGE',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a0aaf50f2f79fee4519e7916c52a4c3a4',1,'NDvalue.h']]],
+  ['nd_5flshift',['ND_LSHIFT',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303ace6f2ad57414668a40ad99a7975a39a3',1,'NDvalue.h']]],
+  ['nd_5flt',['ND_LT',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a62b8af87aa09a0e5292109297e5c53ea',1,'NDvalue.h']]],
+  ['nd_5flte',['ND_LTE',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303ad039cf9fddb1a1bd5a4f2c8d94de221c',1,'NDvalue.h']]],
+  ['nd_5fminus',['ND_MINUS',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a9bdcff5626c4bd04dbbdcb66f94e644d',1,'NDvalue.h']]],
+  ['nd_5fmodulus',['ND_MODULUS',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303ae4f2bfd097e8f8c305eb87d5d8be22da',1,'NDvalue.h']]],
+  ['nd_5fneq',['ND_NEQ',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a11052a76295fb48d56af1b0156b8744a',1,'NDvalue.h']]],
+  ['nd_5fno_5fop',['ND_NO_OP',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a2213dafed725dae6589a8250725e5ef3',1,'NDvalue.h']]],
+  ['nd_5fnot',['ND_NOT',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303ae7222cc51fd3da9c34e8e5ade8abd5d2',1,'NDvalue.h']]],
+  ['nd_5for',['ND_OR',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a90c9ea23bd38dc6f3c2ceeb8524a6ccb',1,'NDvalue.h']]],
+  ['nd_5fplus',['ND_PLUS',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a158dc2b854139b242316e7594028f772',1,'NDvalue.h']]],
+  ['nd_5frshift',['ND_RSHIFT',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a964a08cfc1112d0d976bc526f9766682',1,'NDvalue.h']]],
+  ['nd_5ftimes',['ND_TIMES',['../_n_dvalue_8h.html#afc938fb729c95de25b4d2eb18640b303a736aa2b782740ec8ee2f45ed80a0603e',1,'NDvalue.h']]],
+  ['nil',['NIL',['../_n_dtype-ids_8h.html#af55089c57d3c2d854f6f5aebc517e484a682466b7669a81b39a8d657274fd4b95',1,'NIL():&#160;NDtype-ids.h'],['../webserver_8h.html#a4b078d99ed3d03303ca3ba56f4a18d09a682466b7669a81b39a8d657274fd4b95',1,'NIL():&#160;webserver.h']]],
+  ['no_5fconnection',['NO_CONNECTION',['../webserver_8h.html#a4b078d99ed3d03303ca3ba56f4a18d09acad28945d500e3fc972e2d1c3b948e8e',1,'webserver.h']]],
+  ['nonblock_5fmsu',['NONBLOCK_MSU',['../dfg_8h.html#af31ca3002c5b769551da6f1183bafed5ae3611a7973eb0efeaf748ec24dc8bd35',1,'dfg.h']]]
+];

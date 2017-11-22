@@ -1,0 +1,98 @@
+\hypertarget{ndlog__recv__msu_8h}{\section{src/msus/ndlog/ndlog\-\_\-recv\-\_\-msu.h File Reference}
+\label{ndlog__recv__msu_8h}\index{src/msus/ndlog/ndlog\-\_\-recv\-\_\-msu.\-h@{src/msus/ndlog/ndlog\-\_\-recv\-\_\-msu.\-h}}
+}
+{\ttfamily \#include \char`\"{}msu\-\_\-type.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$inttypes.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structrecv__state}{recv\-\_\-state}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ndlog__recv__msu_8h_ad5c182dc113b0e39b2931e571867a3cf}{N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E\-\_\-\-I\-D}~912
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structrecv__state}{recv\-\_\-state} \hyperlink{ndlog__recv__msu_8h_a173022b0a130dff388aeac7354a96c81}{recv\-\_\-state}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ndlog__recv__msu_8h_a3393ee386b2f069c2835799ce85bc1c7}{print\-\_\-recv\-\_\-msu\-\_\-global\-\_\-state} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structmsu__type}{msu\-\_\-type} \hyperlink{ndlog__recv__msu_8h_acf603bd3bd5cf7fef8285ba188aec135}{N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E}
+\item 
+\hyperlink{structrecv__state}{recv\-\_\-state} $\ast$ \hyperlink{ndlog__recv__msu_8h_a6ed6ee2a478d35817d7fbd0eb7a7418b}{recv\-\_\-msu\-\_\-global\-\_\-state}
+\item 
+int \hyperlink{ndlog__recv__msu_8h_a07f6171a6ed301cb15d5ed63f673137f}{check\-Pkt} \mbox{[}9\mbox{]}
+\item 
+int \hyperlink{ndlog__recv__msu_8h_abc48aa4a47abd8b7f0442db94ae099db}{line\-\_\-pos} \mbox{[}9\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{ndlog__recv__msu_8h_ad5c182dc113b0e39b2931e571867a3cf}{\index{ndlog\-\_\-recv\-\_\-msu.\-h@{ndlog\-\_\-recv\-\_\-msu.\-h}!N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E\-\_\-\-I\-D@{N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E\-\_\-\-I\-D}}
+\index{N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E\-\_\-\-I\-D@{N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E\-\_\-\-I\-D}!ndlog_recv_msu.h@{ndlog\-\_\-recv\-\_\-msu.\-h}}
+\subsubsection[{N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E\-\_\-\-I\-D~912}}\label{ndlog__recv__msu_8h_ad5c182dc113b0e39b2931e571867a3cf}
+
+
+Definition at line 8 of file ndlog\-\_\-recv\-\_\-msu.\-h.
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{ndlog__recv__msu_8h_a173022b0a130dff388aeac7354a96c81}{\index{ndlog\-\_\-recv\-\_\-msu.\-h@{ndlog\-\_\-recv\-\_\-msu.\-h}!recv\-\_\-state@{recv\-\_\-state}}
+\index{recv\-\_\-state@{recv\-\_\-state}!ndlog_recv_msu.h@{ndlog\-\_\-recv\-\_\-msu.\-h}}
+\subsubsection[{recv\-\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf recv\-\_\-state}  {\bf recv\-\_\-state}}}\label{ndlog__recv__msu_8h_a173022b0a130dff388aeac7354a96c81}
+
+
+\subsection{Function Documentation}
+\hypertarget{ndlog__recv__msu_8h_a3393ee386b2f069c2835799ce85bc1c7}{\index{ndlog\-\_\-recv\-\_\-msu.\-h@{ndlog\-\_\-recv\-\_\-msu.\-h}!print\-\_\-recv\-\_\-msu\-\_\-global\-\_\-state@{print\-\_\-recv\-\_\-msu\-\_\-global\-\_\-state}}
+\index{print\-\_\-recv\-\_\-msu\-\_\-global\-\_\-state@{print\-\_\-recv\-\_\-msu\-\_\-global\-\_\-state}!ndlog_recv_msu.h@{ndlog\-\_\-recv\-\_\-msu.\-h}}
+\subsubsection[{print\-\_\-recv\-\_\-msu\-\_\-global\-\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}void print\-\_\-recv\-\_\-msu\-\_\-global\-\_\-state (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ndlog__recv__msu_8h_a3393ee386b2f069c2835799ce85bc1c7}
+
+
+Definition at line 144 of file ndlog\-\_\-recv\-\_\-msu.\-cc.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{ndlog__recv__msu_8h_a07f6171a6ed301cb15d5ed63f673137f}{\index{ndlog\-\_\-recv\-\_\-msu.\-h@{ndlog\-\_\-recv\-\_\-msu.\-h}!check\-Pkt@{check\-Pkt}}
+\index{check\-Pkt@{check\-Pkt}!ndlog_recv_msu.h@{ndlog\-\_\-recv\-\_\-msu.\-h}}
+\subsubsection[{check\-Pkt}]{\setlength{\rightskip}{0pt plus 5cm}int check\-Pkt\mbox{[}9\mbox{]}}}\label{ndlog__recv__msu_8h_a07f6171a6ed301cb15d5ed63f673137f}
+
+
+Definition at line 21 of file ndlog\-\_\-recv\-\_\-msu.\-cc.
+
+\hypertarget{ndlog__recv__msu_8h_abc48aa4a47abd8b7f0442db94ae099db}{\index{ndlog\-\_\-recv\-\_\-msu.\-h@{ndlog\-\_\-recv\-\_\-msu.\-h}!line\-\_\-pos@{line\-\_\-pos}}
+\index{line\-\_\-pos@{line\-\_\-pos}!ndlog_recv_msu.h@{ndlog\-\_\-recv\-\_\-msu.\-h}}
+\subsubsection[{line\-\_\-pos}]{\setlength{\rightskip}{0pt plus 5cm}int line\-\_\-pos\mbox{[}9\mbox{]}}}\label{ndlog__recv__msu_8h_abc48aa4a47abd8b7f0442db94ae099db}
+
+
+Definition at line 25 of file ndlog\-\_\-recv\-\_\-msu.\-cc.
+
+\hypertarget{ndlog__recv__msu_8h_acf603bd3bd5cf7fef8285ba188aec135}{\index{ndlog\-\_\-recv\-\_\-msu.\-h@{ndlog\-\_\-recv\-\_\-msu.\-h}!N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E@{N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E}}
+\index{N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E@{N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E}!ndlog_recv_msu.h@{ndlog\-\_\-recv\-\_\-msu.\-h}}
+\subsubsection[{N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf msu\-\_\-type} N\-D\-L\-O\-G\-\_\-\-R\-E\-C\-V\-\_\-\-M\-S\-U\-\_\-\-T\-Y\-P\-E}}\label{ndlog__recv__msu_8h_acf603bd3bd5cf7fef8285ba188aec135}
+
+
+Definition at line 173 of file ndlog\-\_\-recv\-\_\-msu.\-cc.
+
+\hypertarget{ndlog__recv__msu_8h_a6ed6ee2a478d35817d7fbd0eb7a7418b}{\index{ndlog\-\_\-recv\-\_\-msu.\-h@{ndlog\-\_\-recv\-\_\-msu.\-h}!recv\-\_\-msu\-\_\-global\-\_\-state@{recv\-\_\-msu\-\_\-global\-\_\-state}}
+\index{recv\-\_\-msu\-\_\-global\-\_\-state@{recv\-\_\-msu\-\_\-global\-\_\-state}!ndlog_recv_msu.h@{ndlog\-\_\-recv\-\_\-msu.\-h}}
+\subsubsection[{recv\-\_\-msu\-\_\-global\-\_\-state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf recv\-\_\-state}$\ast$ recv\-\_\-msu\-\_\-global\-\_\-state}}\label{ndlog__recv__msu_8h_a6ed6ee2a478d35817d7fbd0eb7a7418b}
+
+
+Definition at line 20 of file ndlog\-\_\-recv\-\_\-msu.\-cc.
+

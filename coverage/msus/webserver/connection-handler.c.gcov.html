@@ -1,0 +1,326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - msus/webserver/connection-handler.c</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">msus/webserver</a> - connection-handler.c<span style="font-size: 80%;"> (source / <a href="connection-handler.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">102</td>
+            <td class="headerCovTableEntry">140</td>
+            <td class="headerCovTableEntryLo">72.9 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-11-22</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;webserver/connection-handler.h&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;logging.h&quot;
+<span class="lineNum">       3 </span>            : #include &quot;webserver/sslops.h&quot;
+<span class="lineNum">       4 </span>            : #include &quot;webserver/socketops.h&quot;
+<span class="lineNum">       5 </span>            : #include &quot;webserver/dbops.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;webserver/regex.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;webserver/request_parser.h&quot;
+<span class="lineNum">       8 </span>            : #include &lt;unistd.h&gt;
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : #ifdef __GNUC__
+<span class="lineNum">      11 </span>            : #define UNUSED __attribute__ ((unused))
+<span class="lineNum">      12 </span>            : #else
+<span class="lineNum">      13 </span>            : #define UNUSED
+<a name="14"><span class="lineNum">      14 </span>            : #endif</a>
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span><span class="lineCov">         33 : void init_connection(struct connection *conn, int fd) {</span>
+<span class="lineNum">      17 </span><span class="lineCov">         33 :     conn-&gt;fd = fd;</span>
+<span class="lineNum">      18 </span><span class="lineCov">         33 :     conn-&gt;ssl = NULL;</span>
+<span class="lineNum">      19 </span><span class="lineCov">         33 :     conn-&gt;status = CON_ACCEPTED;</span>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">         33 : }</span></a>
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span><span class="lineCov">         15 : void init_read_state(struct read_state *state, struct connection *conn) {</span>
+<span class="lineNum">      23 </span><span class="lineCov">         15 :     state-&gt;conn = *conn;</span>
+<span class="lineNum">      24 </span><span class="lineCov">         15 :     state-&gt;req[0] = '\0';</span>
+<span class="lineNum">      25 </span><span class="lineCov">         15 :     state-&gt;req_len = 0;</span>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">         15 : }</span></a>
+<span class="lineNum">      27 </span>            : 
+<span class="lineNum">      28 </span><span class="lineCov">          9 : void init_http_state(struct http_state *state, struct connection *conn) {</span>
+<span class="lineNum">      29 </span><span class="lineCov">          9 :     state-&gt;conn = *conn;</span>
+<span class="lineNum">      30 </span><span class="lineCov">          9 :     init_parser_state(&amp;state-&gt;parser);</span>
+<span class="lineNum">      31 </span><span class="lineCov">          9 :     bzero(&amp;state-&gt;db, sizeof(state-&gt;db));</span>
+<a name="32"><span class="lineNum">      32 </span><span class="lineCov">          9 : }</span></a>
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span><span class="lineCov">          6 : void init_response_state(struct response_state *state, struct connection *conn) {</span>
+<span class="lineNum">      35 </span><span class="lineCov">          6 :     state-&gt;conn = *conn;</span>
+<span class="lineNum">      36 </span><span class="lineCov">          6 :     state-&gt;url[0] = '\0';</span>
+<span class="lineNum">      37 </span><span class="lineCov">          6 :     state-&gt;resp[0] = '\0';</span>
+<span class="lineNum">      38 </span><span class="lineCov">          6 :     state-&gt;resp_len = 0;</span>
+<a name="39"><span class="lineNum">      39 </span><span class="lineCov">          6 : }</span></a>
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineCov">         24 : int accept_connection(struct connection *conn, int use_ssl) {</span>
+<span class="lineNum">      42 </span><span class="lineCov">         24 :     if (!use_ssl) {</span>
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :        log(LOG_CONNECTION_INFO,&quot;Not implemented, assuming connection is already accepted&quot;);</span>
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :        return WS_COMPLETE;</span>
+<span class="lineNum">      45 </span>            :     }
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span><span class="lineCov">         24 :     if (conn-&gt;ssl == NULL) {</span>
+<span class="lineNum">      48 </span><span class="lineCov">         13 :         conn-&gt;ssl = init_ssl_connection(conn-&gt;fd);</span>
+<span class="lineNum">      49 </span>            :     }
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span><span class="lineCov">         24 :     int rtn = accept_ssl(conn-&gt;ssl);</span>
+<span class="lineNum">      52 </span><span class="lineCov">         24 :     if (rtn == WS_COMPLETE) {</span>
+<span class="lineNum">      53 </span><span class="lineCov">         11 :         log(LOG_CONNECTION_INFO, &quot;Accepted SSL connection on fd %d&quot;, conn-&gt;fd);</span>
+<span class="lineNum">      54 </span><span class="lineCov">         11 :         return WS_COMPLETE;</span>
+<span class="lineNum">      55 </span><span class="lineCov">         13 :     } else if (rtn == -1) {</span>
+<span class="lineNum">      56 </span>            :         //log_error(&quot;Error accepting SSL (fd: %d)&quot;, conn-&gt;fd);
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 :         return WS_ERROR;</span>
+<span class="lineNum">      58 </span>            :     } else {
+<span class="lineNum">      59 </span><span class="lineCov">         13 :         log(LOG_CONNECTION_INFO, &quot;SSL accept incomplete (fd: %d)&quot;, conn-&gt;fd);</span>
+<span class="lineNum">      60 </span><span class="lineCov">         13 :         return rtn;</span>
+<span class="lineNum">      61 </span>            :     }
+<a name="62"><span class="lineNum">      62 </span>            : }</a>
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span><span class="lineCov">         22 : int read_request(struct read_state *state) {</span>
+<span class="lineNum">      65 </span><span class="lineCov">         22 :     int use_ssl = (state-&gt;conn.ssl != NULL);</span>
+<span class="lineNum">      66 </span>            : 
+<span class="lineNum">      67 </span>            :     int rtn;
+<span class="lineNum">      68 </span><span class="lineCov">         22 :     int bytes = MAX_RECV_LEN;</span>
+<span class="lineNum">      69 </span><span class="lineCov">         22 :     if (use_ssl) {</span>
+<span class="lineNum">      70 </span><span class="lineCov">         22 :         rtn = read_ssl(state-&gt;conn.ssl, state-&gt;req, &amp;bytes);</span>
+<span class="lineNum">      71 </span>            :     } else {
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :         rtn = read_socket(state-&gt;conn.fd, state-&gt;req, &amp;bytes);</span>
+<span class="lineNum">      73 </span>            :     }
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span><span class="lineCov">         22 :     switch (rtn) {</span>
+<span class="lineNum">      76 </span>            :         case WS_INCOMPLETE_READ:
+<span class="lineNum">      77 </span>            :         case WS_INCOMPLETE_WRITE:
+<span class="lineNum">      78 </span><span class="lineCov">         13 :             log(LOG_CONNECTION_INFO, &quot;Read incomplete (fd: %d)&quot;, state-&gt;conn.fd);</span>
+<span class="lineNum">      79 </span><span class="lineCov">         13 :             return rtn;</span>
+<span class="lineNum">      80 </span>            :         case WS_COMPLETE:
+<span class="lineNum">      81 </span><span class="lineCov">          9 :             state-&gt;req_len = bytes;</span>
+<span class="lineNum">      82 </span><span class="lineCov">          9 :             log(LOG_CONNECTION_INFO, &quot;Completed reading %d bytes (fd: %d)&quot;,</span>
+<span class="lineNum">      83 </span>            :                        bytes, state-&gt;conn.fd);
+<span class="lineNum">      84 </span><span class="lineCov">          9 :             return WS_COMPLETE;</span>
+<span class="lineNum">      85 </span>            :         case WS_ERROR:
+<span class="lineNum">      86 </span><span class="lineNoCov">          0 :             log(LOG_WS_ERRORS, &quot;Error reading (fd: %d)&quot;, state-&gt;conn.fd);</span>
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :             return WS_ERROR;</span>
+<span class="lineNum">      88 </span>            :         default:
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :             log_error(&quot;Unknown return code: %d (fd: %d)&quot;, rtn, state-&gt;conn.fd);</span>
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 :             return WS_ERROR;</span>
+<span class="lineNum">      91 </span>            :     }
+<a name="92"><span class="lineNum">      92 </span>            : }</a>
+<span class="lineNum">      93 </span>            : 
+<span class="lineNum">      94 </span><span class="lineCov">          9 : int parse_request(char *req, int req_len, struct http_state *state) {</span>
+<span class="lineNum">      95 </span><span class="lineCov">          9 :     int status = parse_http(&amp;state-&gt;parser, req, req_len);</span>
+<span class="lineNum">      96 </span>            : 
+<span class="lineNum">      97 </span><span class="lineCov">          9 :     switch (status) {</span>
+<span class="lineNum">      98 </span>            :         case WS_COMPLETE:
+<span class="lineNum">      99 </span><span class="lineCov">          6 :             log(LOG_CONNECTION_INFO, &quot;Request complete (fd: %d)&quot;, state-&gt;conn.fd);</span>
+<span class="lineNum">     100 </span><span class="lineCov">          6 :             return WS_COMPLETE;</span>
+<span class="lineNum">     101 </span>            :         case WS_INCOMPLETE_READ:
+<span class="lineNum">     102 </span><span class="lineCov">          2 :             log(LOG_CONNECTION_INFO, &quot;Partial request received (fd: %d)&quot;, state-&gt;conn.fd);</span>
+<span class="lineNum">     103 </span><span class="lineCov">          2 :             return WS_INCOMPLETE_READ;</span>
+<span class="lineNum">     104 </span>            :         case WS_ERROR:
+<span class="lineNum">     105 </span><span class="lineCov">          1 :             log_error(&quot;Error parsing request (fd: %d)&quot;, state-&gt;conn.fd);</span>
+<span class="lineNum">     106 </span><span class="lineCov">          1 :             return WS_ERROR;</span>
+<span class="lineNum">     107 </span>            :         default:
+<span class="lineNum">     108 </span><span class="lineNoCov">          0 :             log_error(&quot;Unknown status %d returned from parrser (fd: %d)&quot;, status, state-&gt;conn.fd);</span>
+<span class="lineNum">     109 </span><span class="lineNoCov">          0 :             return WS_ERROR;</span>
+<span class="lineNum">     110 </span>            :     }
+<span class="lineNum">     111 </span>            : }
+<span class="lineNum">     112 </span>            : 
+<a name="113"><span class="lineNum">     113 </span>            : #define REGEX_KEY &quot;regex=&quot;</a>
+<span class="lineNum">     114 </span>            : 
+<span class="lineNum">     115 </span><span class="lineCov">          8 : int has_regex(char *url) {</span>
+<span class="lineNum">     116 </span><span class="lineCov">          8 :     char *regex_loc = strstr(url, REGEX_KEY);</span>
+<span class="lineNum">     117 </span><span class="lineCov">          8 :     if (regex_loc == NULL) {</span>
+<span class="lineNum">     118 </span><span class="lineCov">          4 :         log(LOG_CONNECTION_INFO, &quot;Found no %s in %s&quot;, REGEX_KEY, url);</span>
+<span class="lineNum">     119 </span><span class="lineCov">          4 :         return 0;</span>
+<span class="lineNum">     120 </span>            :     } else {
+<span class="lineNum">     121 </span><span class="lineCov">          4 :         log(LOG_CONNECTION_INFO, &quot;Found regex&quot;);</span>
+<span class="lineNum">     122 </span><span class="lineCov">          4 :         return 1;</span>
+<span class="lineNum">     123 </span>            :     }
+<span class="lineNum">     124 </span>            : }
+<a name="125"><span class="lineNum">     125 </span>            : #define MAX_REGEX_VALUE_LEN 64</a>
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span><span class="lineCov">          2 : static int get_regex_value(char *url, char *regex) {</span>
+<span class="lineNum">     128 </span><span class="lineCov">          2 :     char *regex_start = strstr(url, REGEX_KEY);</span>
+<span class="lineNum">     129 </span><span class="lineCov">          2 :     if (regex_start == NULL)</span>
+<span class="lineNum">     130 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">     131 </span><span class="lineCov">          2 :     regex_start += strlen(REGEX_KEY);</span>
+<span class="lineNum">     132 </span><span class="lineCov">          2 :     int start_i = (regex_start - url);</span>
+<span class="lineNum">     133 </span><span class="lineCov">          8 :     for (int i=start_i; (i-start_i)&lt;MAX_REGEX_VALUE_LEN; i++) {</span>
+<span class="lineNum">     134 </span><span class="lineCov">          8 :         switch (url[i]) {</span>
+<span class="lineNum">     135 </span>            :             case '?':
+<span class="lineNum">     136 </span>            :             case '&amp;':
+<span class="lineNum">     137 </span>            :             case '\0':
+<span class="lineNum">     138 </span>            :             case ' ':
+<span class="lineNum">     139 </span><span class="lineCov">          2 :                 strncpy(regex, &amp;url[start_i], i - start_i);</span>
+<span class="lineNum">     140 </span><span class="lineCov">          2 :                 regex[i-start_i] = '\0';</span>
+<span class="lineNum">     141 </span><span class="lineCov">          2 :                 return 0;</span>
+<span class="lineNum">     142 </span>            :             default:
+<span class="lineNum">     143 </span><span class="lineCov">          6 :                 continue;</span>
+<span class="lineNum">     144 </span>            :         }
+<span class="lineNum">     145 </span>            :     }
+<span class="lineNum">     146 </span><span class="lineNoCov">          0 :     log_error(&quot;Requested regex value (%s) too long&quot;, regex_start);</span>
+<span class="lineNum">     147 </span><span class="lineNoCov">          0 :     return -1;</span>
+<a name="148"><span class="lineNum">     148 </span>            : }</a>
+<span class="lineNum">     149 </span>            : 
+<span class="lineNum">     150 </span><span class="lineCov">          6 : int access_database(char *url, struct db_state *state) {</span>
+<span class="lineNum">     151 </span><span class="lineCov">          6 :     if ( strstr(url, &quot;database&quot;) == NULL ) {</span>
+<span class="lineNum">     152 </span><span class="lineCov">          6 :         return WS_COMPLETE;</span>
+<span class="lineNum">     153 </span>            :     }
+<span class="lineNum">     154 </span><span class="lineNoCov">          0 :     int rtn = query_db(state);</span>
+<span class="lineNum">     155 </span><span class="lineNoCov">          0 :     switch (rtn) {</span>
+<span class="lineNum">     156 </span>            :         case WS_COMPLETE:
+<span class="lineNum">     157 </span><span class="lineNoCov">          0 :             log(LOG_CONNECTION_INFO, &quot;Successfully queried db&quot;);</span>
+<span class="lineNum">     158 </span><span class="lineNoCov">          0 :             return WS_COMPLETE;</span>
+<span class="lineNum">     159 </span>            :         case WS_INCOMPLETE_READ:
+<span class="lineNum">     160 </span>            :         case WS_INCOMPLETE_WRITE:
+<span class="lineNum">     161 </span><span class="lineNoCov">          0 :             log(LOG_CONNECTION_INFO, &quot;Partial DB query&quot;);</span>
+<span class="lineNum">     162 </span><span class="lineNoCov">          0 :             return rtn;</span>
+<span class="lineNum">     163 </span>            :         case WS_ERROR:
+<span class="lineNum">     164 </span><span class="lineNoCov">          0 :             log_error(&quot;Error querying database&quot;);</span>
+<span class="lineNum">     165 </span><span class="lineNoCov">          0 :             return WS_ERROR;</span>
+<span class="lineNum">     166 </span>            :         default:
+<span class="lineNum">     167 </span><span class="lineNoCov">          0 :             log_error(&quot;Unknown return %d from database query&quot;, rtn);</span>
+<span class="lineNum">     168 </span><span class="lineNoCov">          0 :             return WS_ERROR;</span>
+<span class="lineNum">     169 </span>            :     }
+<span class="lineNum">     170 </span>            : }
+<span class="lineNum">     171 </span>            : 
+<span class="lineNum">     172 </span>            : #define DEFAULT_HTTP_HEADER\
+<span class="lineNum">     173 </span>            :     &quot;HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: %d\r\n\r\n&quot; \
+<span class="lineNum">     174 </span>            : 
+<span class="lineNum">     175 </span>            : #define DEFAULT_HTTP_BODY\
+<span class="lineNum">     176 </span>            :     &quot;&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;body&gt;\n&lt;h1&gt;Dedos New Runtime&lt;/h1&gt;\n&lt;/body&gt;\n&lt;/html&gt;&quot;
+<a name="177"><span class="lineNum">     177 </span>            : </a>
+<span class="lineNum">     178 </span>            : 
+<span class="lineNum">     179 </span><span class="lineCov">          4 : int craft_nonregex_response(char UNUSED *url, char *response) {</span>
+<span class="lineNum">     180 </span><span class="lineCov">          4 :     int n = sprintf(response, DEFAULT_HTTP_HEADER DEFAULT_HTTP_BODY,</span>
+<span class="lineNum">     181 </span>            :             (int)strlen(DEFAULT_HTTP_BODY));
+<span class="lineNum">     182 </span><span class="lineCov">          4 :     log(LOG_CONNECTION_INFO, &quot;Crafted non-regex response&quot;);</span>
+<span class="lineNum">     183 </span><span class="lineCov">          4 :     return n;</span>
+<a name="184"><span class="lineNum">     184 </span>            : }</a>
+<span class="lineNum">     185 </span>            : 
+<span class="lineNum">     186 </span><span class="lineCov">          2 : int craft_regex_response(char *url, char *response) {</span>
+<span class="lineNum">     187 </span>            :     char regex_value[MAX_REGEX_VALUE_LEN];
+<span class="lineNum">     188 </span><span class="lineCov">          2 :     int rtn = get_regex_value(url, regex_value);</span>
+<span class="lineNum">     189 </span><span class="lineCov">          2 :     if (rtn != 0) {</span>
+<span class="lineNum">     190 </span><span class="lineNoCov">          0 :         log_error(&quot;Non-regex URL passed to craft_regex_response!&quot;);</span>
+<span class="lineNum">     191 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">     192 </span>            :     } else {
+<span class="lineNum">     193 </span>            :         char html[4096];
+<span class="lineNum">     194 </span><span class="lineCov">          2 :         rtn = regex_html(regex_value, html);</span>
+<span class="lineNum">     195 </span><span class="lineCov">          2 :         if (rtn &lt; 0) {</span>
+<span class="lineNum">     196 </span><span class="lineNoCov">          0 :             log_error(&quot;Error crafting regex response&quot;);</span>
+<span class="lineNum">     197 </span><span class="lineNoCov">          0 :             return -1;</span>
+<span class="lineNum">     198 </span>            :         }
+<span class="lineNum">     199 </span><span class="lineCov">          2 :         sprintf(response, DEFAULT_HTTP_HEADER &quot;%s&quot;, (int)strlen(html), html);</span>
+<span class="lineNum">     200 </span><span class="lineCov">          2 :         log(LOG_CONNECTION_INFO, &quot;Crafted regex response&quot;);</span>
+<span class="lineNum">     201 </span><span class="lineCov">          2 :         return strlen(response);</span>
+<span class="lineNum">     202 </span>            :     }
+<a name="203"><span class="lineNum">     203 </span>            : }</a>
+<span class="lineNum">     204 </span>            : 
+<span class="lineNum">     205 </span><span class="lineCov">          6 : int write_response(struct response_state *state) {</span>
+<span class="lineNum">     206 </span><span class="lineCov">          6 :     if (state-&gt;resp[0] == '\0') {</span>
+<span class="lineNum">     207 </span><span class="lineNoCov">          0 :         log_error(&quot;Attempted to write empty respnose&quot;);</span>
+<span class="lineNum">     208 </span><span class="lineNoCov">          0 :         return WS_ERROR;</span>
+<span class="lineNum">     209 </span>            :     }
+<span class="lineNum">     210 </span>            : 
+<span class="lineNum">     211 </span><span class="lineCov">          6 :     int use_ssl = (state-&gt;conn.ssl != NULL);</span>
+<span class="lineNum">     212 </span><span class="lineCov">          6 :     int bytes = state-&gt;resp_len;</span>
+<span class="lineNum">     213 </span>            :     int rtn;
+<span class="lineNum">     214 </span><span class="lineCov">          6 :     if (use_ssl) {</span>
+<span class="lineNum">     215 </span><span class="lineCov">          6 :         rtn = write_ssl(state-&gt;conn.ssl, state-&gt;resp, &amp;bytes);</span>
+<span class="lineNum">     216 </span>            :     } else {
+<span class="lineNum">     217 </span><span class="lineNoCov">          0 :         rtn = write_socket(state-&gt;conn.fd, state-&gt;resp, &amp;bytes);</span>
+<span class="lineNum">     218 </span>            :     }
+<span class="lineNum">     219 </span>            : 
+<span class="lineNum">     220 </span><span class="lineCov">          6 :     switch (rtn) {</span>
+<span class="lineNum">     221 </span>            :         case WS_INCOMPLETE_READ:
+<span class="lineNum">     222 </span>            :         case WS_INCOMPLETE_WRITE:
+<span class="lineNum">     223 </span><span class="lineNoCov">          0 :             log(LOG_CONNECTION_INFO, &quot;Write incomplete (fd: %d)&quot;, state-&gt;conn.fd);</span>
+<span class="lineNum">     224 </span><span class="lineNoCov">          0 :             return rtn;</span>
+<span class="lineNum">     225 </span>            :         case WS_COMPLETE:
+<span class="lineNum">     226 </span><span class="lineCov">          6 :             log(LOG_CONNECTION_INFO, &quot;Completed writing response (fd: %d)&quot;, state-&gt;conn.fd);</span>
+<span class="lineNum">     227 </span><span class="lineCov">          6 :             return WS_COMPLETE;</span>
+<span class="lineNum">     228 </span>            :         case WS_ERROR:
+<span class="lineNum">     229 </span><span class="lineNoCov">          0 :             log_error(&quot;Error writing response (fd: %d)&quot;, state-&gt;conn.fd);</span>
+<span class="lineNum">     230 </span><span class="lineNoCov">          0 :             return WS_ERROR;</span>
+<span class="lineNum">     231 </span>            :         default:
+<span class="lineNum">     232 </span><span class="lineNoCov">          0 :             log_error(&quot;Unknown return %d from call to write (fd: %d)&quot;, rtn, state-&gt;conn.fd);</span>
+<span class="lineNum">     233 </span><span class="lineNoCov">          0 :             return WS_ERROR;</span>
+<span class="lineNum">     234 </span>            :     }
+<a name="235"><span class="lineNum">     235 </span>            : }</a>
+<span class="lineNum">     236 </span>            : 
+<span class="lineNum">     237 </span><span class="lineCov">          7 : int close_connection(struct connection *conn) {</span>
+<span class="lineNum">     238 </span><span class="lineCov">          7 :     log(LOG_CONNECTION_INFO, &quot;Closing connection (fd: %d)&quot;, conn-&gt;fd);</span>
+<span class="lineNum">     239 </span><span class="lineCov">          7 :     if (conn-&gt;ssl != NULL) {</span>
+<span class="lineNum">     240 </span><span class="lineCov">          7 :         close_ssl(conn-&gt;ssl);</span>
+<span class="lineNum">     241 </span>            :     }
+<span class="lineNum">     242 </span>            : 
+<span class="lineNum">     243 </span><span class="lineCov">          7 :     int rtn = close(conn-&gt;fd);</span>
+<span class="lineNum">     244 </span><span class="lineCov">          7 :     if (rtn != 0) {</span>
+<span class="lineNum">     245 </span><span class="lineNoCov">          0 :         log_perror(&quot;Error closing connection (fd: %d)&quot;, conn-&gt;fd);</span>
+<span class="lineNum">     246 </span><span class="lineNoCov">          0 :         return WS_ERROR;</span>
+<span class="lineNum">     247 </span>            :     }
+<span class="lineNum">     248 </span><span class="lineCov">          7 :     log(LOG_CONNECTION_INFO, &quot;Closed connection (fd: %d)&quot;, conn-&gt;fd);</span>
+<span class="lineNum">     249 </span><span class="lineCov">          7 :     return WS_COMPLETE;</span>
+<span class="lineNum">     250 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

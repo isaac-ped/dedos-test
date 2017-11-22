@@ -1,0 +1,250 @@
+\hypertarget{msu__app__tcp__echo_8c}{\section{src/msus/pico\-\_\-tcp/msu\-\_\-app\-\_\-tcp\-\_\-echo.c File Reference}
+\label{msu__app__tcp__echo_8c}\index{src/msus/pico\-\_\-tcp/msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{src/msus/pico\-\_\-tcp/msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+}
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include $<$poll.\-h$>$}\\*
+{\ttfamily \#include $<$errno.\-h$>$}\\*
+{\ttfamily \#include $<$unistd.\-h$>$}\\*
+{\ttfamily \#include $<$signal.\-h$>$}\\*
+{\ttfamily \#include $<$getopt.\-h$>$}\\*
+{\ttfamily \#include $<$fcntl.\-h$>$}\\*
+{\ttfamily \#include $<$libgen.\-h$>$}\\*
+{\ttfamily \#include $<$sys/types.\-h$>$}\\*
+{\ttfamily \#include $<$pthread.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-stack.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-config.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-dev\-\_\-vde.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-ipv4.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-ipv6.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-socket.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-dev\-\_\-tun.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-dev\-\_\-tap.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-nat.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-icmp4.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-icmp6.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-dns\-\_\-client.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-dev\-\_\-loop.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-dhcp\-\_\-client.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-dhcp\-\_\-server.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-ipfilter.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-olsr.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-sntp\-\_\-client.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-mdns.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-tftp.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-dev\-\_\-pcap.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-queue.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-frame.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-tcp/msu\-\_\-app\-\_\-tcp\-\_\-echo.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-socket\-\_\-tcp.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}communication.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}routing.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pico\-\_\-tcp/pico\-\_\-msg\-\_\-types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}logging.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}local\-\_\-msu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}unused\-\_\-def.\-h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{msu__app__tcp__echo_8c_a369266c24eacffb87046522897a570d5}{\-\_\-\-G\-N\-U\-\_\-\-S\-O\-U\-R\-C\-E}
+\item 
+\#define \hyperlink{msu__app__tcp__echo_8c_aae760a333f192fb38e2c1663342f3ab4}{R\-E\-C\-V\-\_\-\-M\-O\-D\-E}~0
+\item 
+\#define \hyperlink{msu__app__tcp__echo_8c_adb442274ee40584b612e95ed54a8d487}{S\-E\-N\-D\-\_\-\-M\-O\-D\-E}~0
+\item 
+\#define \hyperlink{msu__app__tcp__echo_8c_a75362c308613331503a6015de2e91981}{H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-O\-N\-L\-Y\-\_\-\-M\-O\-D\-E}~0
+\item 
+\#define \hyperlink{msu__app__tcp__echo_8c_a403cf3149c084cea115b85c90721039a}{B\-S\-I\-Z\-E}~(1024)
+\item 
+\#define \hyperlink{msu__app__tcp__echo_8c_a1b981b21c2aebf56bba9db2fbd03c854}{P\-C\-A\-P}~1
+\item 
+\#define \hyperlink{msu__app__tcp__echo_8c_ad589d98db39967a5f5378b5f2a19231b}{T\-A\-P}~2
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{msu__app__tcp__echo_8c_aad5e4a98c67c1dfd2b4741625ca8c5a0}{msu\-\_\-app\-\_\-tcpecho} (uint16\-\_\-t listen\-\_\-port)
+\item 
+void \hyperlink{msu__app__tcp__echo_8c_a2ca5a74876c89ca4b6458c0c8ec8c336}{msu\-\_\-cb\-\_\-tcpecho} (uint16\-\_\-t ev, struct pico\-\_\-socket $\ast$s)
+\item 
+int \hyperlink{msu__app__tcp__echo_8c_a29be64bcfae355865737a8c46535f830}{msu\-\_\-send\-\_\-tcpecho} (struct pico\-\_\-socket $\ast$s, char $\ast$recvbuf, int len)
+\item 
+static char \hyperlink{unused__def_8h_addf5ec070e9499d36b7f2009ce736076}{U\-N\-U\-S\-E\-D} $\ast$ \hyperlink{msu__app__tcp__echo_8c_aa32ec8fb8d32fd640dfc048525f18b47}{msu\-\_\-cpy\-\_\-arg} (char $\ast$$\ast$dst, char $\ast$str)
+\item 
+static int \hyperlink{msu__app__tcp__echo_8c_a8a5c23b701c58b4d0607c8d33dfbf675}{msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-receive} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, struct \hyperlink{structmsu__msg}{msu\-\_\-msg} $\ast$data)
+\item 
+static int \hyperlink{msu__app__tcp__echo_8c_ab7b1bbfa4e20ef290b5af6cc273a1a9b}{msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-init} (struct \hyperlink{structlocal__msu}{local\-\_\-msu} $\ast$self, struct \hyperlink{structmsu__init__data}{msu\-\_\-init\-\_\-data} $\ast$init\-\_\-data)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>struct pico\_ip4 \hyperlink{msu__app__tcp__echo_8c_a0928080bbc0d51ff5dd93e7af2e98111}{ip4}\\
+\>struct pico\_ip6 \hyperlink{msu__app__tcp__echo_8c_a0d69cc4a863463bb37b004d5abd9e4e7}{ip6}\\
+\} \hyperlink{msu__app__tcp__echo_8c_a12dc0b21a4aa505d16229dc2e5a60319}{inaddr\_any}\\
+
+\end{tabbing}\item 
+struct \hyperlink{structmsu__type}{msu\-\_\-type} \hyperlink{msu__app__tcp__echo_8c_ade1589f138592e563a6e855762192ab0}{M\-S\-U\-\_\-\-A\-P\-P\-\_\-\-T\-C\-P\-\_\-\-E\-C\-H\-O\-\_\-\-T\-Y\-P\-E}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{msu__app__tcp__echo_8c_a369266c24eacffb87046522897a570d5}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!\-\_\-\-G\-N\-U\-\_\-\-S\-O\-U\-R\-C\-E@{\-\_\-\-G\-N\-U\-\_\-\-S\-O\-U\-R\-C\-E}}
+\index{\-\_\-\-G\-N\-U\-\_\-\-S\-O\-U\-R\-C\-E@{\-\_\-\-G\-N\-U\-\_\-\-S\-O\-U\-R\-C\-E}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{\-\_\-\-G\-N\-U\-\_\-\-S\-O\-U\-R\-C\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define \-\_\-\-G\-N\-U\-\_\-\-S\-O\-U\-R\-C\-E}}\label{msu__app__tcp__echo_8c_a369266c24eacffb87046522897a570d5}
+
+
+Definition at line 1 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_a403cf3149c084cea115b85c90721039a}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!B\-S\-I\-Z\-E@{B\-S\-I\-Z\-E}}
+\index{B\-S\-I\-Z\-E@{B\-S\-I\-Z\-E}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{B\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-S\-I\-Z\-E~(1024)}}\label{msu__app__tcp__echo_8c_a403cf3149c084cea115b85c90721039a}
+
+
+Definition at line 66 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_a75362c308613331503a6015de2e91981}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-O\-N\-L\-Y\-\_\-\-M\-O\-D\-E@{H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-O\-N\-L\-Y\-\_\-\-M\-O\-D\-E}}
+\index{H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-O\-N\-L\-Y\-\_\-\-M\-O\-D\-E@{H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-O\-N\-L\-Y\-\_\-\-M\-O\-D\-E}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-O\-N\-L\-Y\-\_\-\-M\-O\-D\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\-A\-N\-D\-S\-H\-A\-K\-E\-\_\-\-O\-N\-L\-Y\-\_\-\-M\-O\-D\-E~0}}\label{msu__app__tcp__echo_8c_a75362c308613331503a6015de2e91981}
+
+
+Definition at line 64 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_a1b981b21c2aebf56bba9db2fbd03c854}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!P\-C\-A\-P@{P\-C\-A\-P}}
+\index{P\-C\-A\-P@{P\-C\-A\-P}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{P\-C\-A\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-C\-A\-P~1}}\label{msu__app__tcp__echo_8c_a1b981b21c2aebf56bba9db2fbd03c854}
+\hypertarget{msu__app__tcp__echo_8c_aae760a333f192fb38e2c1663342f3ab4}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!R\-E\-C\-V\-\_\-\-M\-O\-D\-E@{R\-E\-C\-V\-\_\-\-M\-O\-D\-E}}
+\index{R\-E\-C\-V\-\_\-\-M\-O\-D\-E@{R\-E\-C\-V\-\_\-\-M\-O\-D\-E}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{R\-E\-C\-V\-\_\-\-M\-O\-D\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-E\-C\-V\-\_\-\-M\-O\-D\-E~0}}\label{msu__app__tcp__echo_8c_aae760a333f192fb38e2c1663342f3ab4}
+
+
+Definition at line 62 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_adb442274ee40584b612e95ed54a8d487}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!S\-E\-N\-D\-\_\-\-M\-O\-D\-E@{S\-E\-N\-D\-\_\-\-M\-O\-D\-E}}
+\index{S\-E\-N\-D\-\_\-\-M\-O\-D\-E@{S\-E\-N\-D\-\_\-\-M\-O\-D\-E}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{S\-E\-N\-D\-\_\-\-M\-O\-D\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-E\-N\-D\-\_\-\-M\-O\-D\-E~0}}\label{msu__app__tcp__echo_8c_adb442274ee40584b612e95ed54a8d487}
+
+
+Definition at line 63 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_ad589d98db39967a5f5378b5f2a19231b}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!T\-A\-P@{T\-A\-P}}
+\index{T\-A\-P@{T\-A\-P}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{T\-A\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-A\-P~2}}\label{msu__app__tcp__echo_8c_ad589d98db39967a5f5378b5f2a19231b}
+
+
+\subsection{Function Documentation}
+\hypertarget{msu__app__tcp__echo_8c_ab7b1bbfa4e20ef290b5af6cc273a1a9b}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-init@{msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-init}}
+\index{msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-init@{msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-init}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}static int msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{struct {\bf msu\-\_\-init\-\_\-data} $\ast$}]{init\-\_\-data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__app__tcp__echo_8c_ab7b1bbfa4e20ef290b5af6cc273a1a9b}
+
+
+Definition at line 264 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_a8a5c23b701c58b4d0607c8d33dfbf675}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-receive@{msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-receive}}
+\index{msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-receive@{msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-receive}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-receive}]{\setlength{\rightskip}{0pt plus 5cm}static int msu\-\_\-app\-\_\-tcp\-\_\-echo\-\_\-receive (
+\begin{DoxyParamCaption}
+\item[{struct {\bf local\-\_\-msu} $\ast$}]{self, }
+\item[{struct {\bf msu\-\_\-msg} $\ast$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__app__tcp__echo_8c_a8a5c23b701c58b4d0607c8d33dfbf675}
+
+
+Definition at line 254 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_aad5e4a98c67c1dfd2b4741625ca8c5a0}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!msu\-\_\-app\-\_\-tcpecho@{msu\-\_\-app\-\_\-tcpecho}}
+\index{msu\-\_\-app\-\_\-tcpecho@{msu\-\_\-app\-\_\-tcpecho}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{msu\-\_\-app\-\_\-tcpecho}]{\setlength{\rightskip}{0pt plus 5cm}void msu\-\_\-app\-\_\-tcpecho (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{listen\-\_\-port}
+\end{DoxyParamCaption}
+)}}\label{msu__app__tcp__echo_8c_aad5e4a98c67c1dfd2b4741625ca8c5a0}
+
+
+Definition at line 222 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_a2ca5a74876c89ca4b6458c0c8ec8c336}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!msu\-\_\-cb\-\_\-tcpecho@{msu\-\_\-cb\-\_\-tcpecho}}
+\index{msu\-\_\-cb\-\_\-tcpecho@{msu\-\_\-cb\-\_\-tcpecho}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{msu\-\_\-cb\-\_\-tcpecho}]{\setlength{\rightskip}{0pt plus 5cm}void msu\-\_\-cb\-\_\-tcpecho (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{ev, }
+\item[{struct pico\-\_\-socket $\ast$}]{s}
+\end{DoxyParamCaption}
+)}}\label{msu__app__tcp__echo_8c_a2ca5a74876c89ca4b6458c0c8ec8c336}
+
+
+Definition at line 134 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_aa32ec8fb8d32fd640dfc048525f18b47}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!msu\-\_\-cpy\-\_\-arg@{msu\-\_\-cpy\-\_\-arg}}
+\index{msu\-\_\-cpy\-\_\-arg@{msu\-\_\-cpy\-\_\-arg}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{msu\-\_\-cpy\-\_\-arg}]{\setlength{\rightskip}{0pt plus 5cm}static char {\bf U\-N\-U\-S\-E\-D}$\ast$ msu\-\_\-cpy\-\_\-arg (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{dst, }
+\item[{char $\ast$}]{str}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{msu__app__tcp__echo_8c_aa32ec8fb8d32fd640dfc048525f18b47}
+
+
+Definition at line 79 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_a29be64bcfae355865737a8c46535f830}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!msu\-\_\-send\-\_\-tcpecho@{msu\-\_\-send\-\_\-tcpecho}}
+\index{msu\-\_\-send\-\_\-tcpecho@{msu\-\_\-send\-\_\-tcpecho}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{msu\-\_\-send\-\_\-tcpecho}]{\setlength{\rightskip}{0pt plus 5cm}int msu\-\_\-send\-\_\-tcpecho (
+\begin{DoxyParamCaption}
+\item[{struct pico\-\_\-socket $\ast$}]{s, }
+\item[{char $\ast$}]{recvbuf, }
+\item[{int}]{len}
+\end{DoxyParamCaption}
+)}}\label{msu__app__tcp__echo_8c_a29be64bcfae355865737a8c46535f830}
+
+
+Definition at line 104 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{msu__app__tcp__echo_8c_a12dc0b21a4aa505d16229dc2e5a60319}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!inaddr\-\_\-any@{inaddr\-\_\-any}}
+\index{inaddr\-\_\-any@{inaddr\-\_\-any}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{inaddr\-\_\-any}]{\setlength{\rightskip}{0pt plus 5cm}union \{ ... \}   inaddr\-\_\-any}}\label{msu__app__tcp__echo_8c_a12dc0b21a4aa505d16229dc2e5a60319}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \{
+    .ip4 = \{0\}, .ip6 = \{\{0\}\}
+\}
+\end{DoxyCode}
+\hypertarget{msu__app__tcp__echo_8c_a0928080bbc0d51ff5dd93e7af2e98111}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!ip4@{ip4}}
+\index{ip4@{ip4}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{ip4}]{\setlength{\rightskip}{0pt plus 5cm}struct pico\-\_\-ip4 ip4}}\label{msu__app__tcp__echo_8c_a0928080bbc0d51ff5dd93e7af2e98111}
+
+
+Definition at line 72 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_a0d69cc4a863463bb37b004d5abd9e4e7}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!ip6@{ip6}}
+\index{ip6@{ip6}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{ip6}]{\setlength{\rightskip}{0pt plus 5cm}struct pico\-\_\-ip6 ip6}}\label{msu__app__tcp__echo_8c_a0d69cc4a863463bb37b004d5abd9e4e7}
+
+
+Definition at line 73 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+
+\hypertarget{msu__app__tcp__echo_8c_ade1589f138592e563a6e855762192ab0}{\index{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}!M\-S\-U\-\_\-\-A\-P\-P\-\_\-\-T\-C\-P\-\_\-\-E\-C\-H\-O\-\_\-\-T\-Y\-P\-E@{M\-S\-U\-\_\-\-A\-P\-P\-\_\-\-T\-C\-P\-\_\-\-E\-C\-H\-O\-\_\-\-T\-Y\-P\-E}}
+\index{M\-S\-U\-\_\-\-A\-P\-P\-\_\-\-T\-C\-P\-\_\-\-E\-C\-H\-O\-\_\-\-T\-Y\-P\-E@{M\-S\-U\-\_\-\-A\-P\-P\-\_\-\-T\-C\-P\-\_\-\-E\-C\-H\-O\-\_\-\-T\-Y\-P\-E}!msu_app_tcp_echo.c@{msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c}}
+\subsubsection[{M\-S\-U\-\_\-\-A\-P\-P\-\_\-\-T\-C\-P\-\_\-\-E\-C\-H\-O\-\_\-\-T\-Y\-P\-E}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf msu\-\_\-type} M\-S\-U\-\_\-\-A\-P\-P\-\_\-\-T\-C\-P\-\_\-\-E\-C\-H\-O\-\_\-\-T\-Y\-P\-E}}\label{msu__app__tcp__echo_8c_ade1589f138592e563a6e855762192ab0}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \{
+    .name=\textcolor{stringliteral}{"app\_tcp\_echo\_msu"},
+    .id = \hyperlink{msu__app__tcp__echo_8h_a80c130bd47eb4b21f6bbd7e69e7b2f84}{PICO\_TCP\_APP\_TCP\_ECHO\_ID},
+    .init = \hyperlink{msu__app__tcp__echo_8c_ab7b1bbfa4e20ef290b5af6cc273a1a9b}{msu\_app\_tcp\_echo\_init},
+    .receive = \hyperlink{msu__app__tcp__echo_8c_a8a5c23b701c58b4d0607c8d33dfbf675}{msu\_app\_tcp\_echo\_receive},
+\}
+\end{DoxyCode}
+
+
+Definition at line 358 of file msu\-\_\-app\-\_\-tcp\-\_\-echo.\-c.
+

@@ -1,0 +1,155 @@
+\hypertarget{class_n_d___value}{\section{N\-D\-\_\-\-Value Class Reference}
+\label{class_n_d___value}\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}}
+}
+
+
+{\ttfamily \#include $<$N\-Dvalue.\-h$>$}
+
+Inheritance diagram for N\-D\-\_\-\-Value\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=9.000000cm]{class_n_d___value}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_n_d___value_a4381bb1dfe297b61ec7a2dca7aa0ee59}{N\-D\-\_\-\-Value} (\hyperlink{_n_dtype-ids_8h_af55089c57d3c2d854f6f5aebc517e484}{N\-D\-Value\-Type\-Id} value)
+\item 
+virtual \hyperlink{class_n_d___value_afe3a3a13b45142f1413d2fe2de4951d1}{$\sim$\-N\-D\-\_\-\-Value} ()
+\item 
+\hyperlink{_n_dtype-ids_8h_af55089c57d3c2d854f6f5aebc517e484}{N\-D\-Value\-Type\-Id} \hyperlink{class_n_d___value_a259c3f918c7fedd9d438bec96f15911a}{Get\-Type} () const 
+\item 
+string \hyperlink{class_n_d___value_a2c4d333803c5cd8d1f0f6cc274c85151}{Get\-Type\-Name} () const 
+\item 
+virtual string \hyperlink{class_n_d___value_a7660a0e6c07a198410fc05725d903219}{To\-String} () const =0
+\item 
+virtual \hyperlink{class_n_d___value}{N\-D\-\_\-\-Value} $\ast$ \hyperlink{class_n_d___value_a83fbc37518fd13b38059a47c422e9024}{Clone} () const =0
+\item 
+virtual bool \hyperlink{class_n_d___value_a7b6432defc1b1cada5a31b5c16d29ac6}{Equals} (const \hyperlink{class_n_d___value}{N\-D\-\_\-\-Value} $\ast$v) const =0
+\item 
+virtual \hyperlink{class_n_d___value}{N\-D\-\_\-\-Value} $\ast$ \hyperlink{class_n_d___value_aa3e290edb140d8676bfe0316c947502d}{Eval} (\hyperlink{_n_dvalue_8h_afc938fb729c95de25b4d2eb18640b303}{Ndlog\-\_\-\-Operator} op, \hyperlink{class_n_d___value}{N\-D\-\_\-\-Value} $\ast$rhs=N\-U\-L\-L)=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_n_dtype-ids_8h_af55089c57d3c2d854f6f5aebc517e484}{N\-D\-Value\-Type\-Id} \hyperlink{class_n_d___value_ad6a23ab31aafc1e12b829d66f910131c}{m\-\_\-type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 34 of file N\-Dvalue.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_n_d___value_a4381bb1dfe297b61ec7a2dca7aa0ee59}{\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}!N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}}
+\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}!ND_Value@{N\-D\-\_\-\-Value}}
+\subsubsection[{N\-D\-\_\-\-Value}]{\setlength{\rightskip}{0pt plus 5cm}N\-D\-\_\-\-Value\-::\-N\-D\-\_\-\-Value (
+\begin{DoxyParamCaption}
+\item[{{\bf N\-D\-Value\-Type\-Id}}]{value}
+\end{DoxyParamCaption}
+)}}\label{class_n_d___value_a4381bb1dfe297b61ec7a2dca7aa0ee59}
+
+
+Definition at line 3 of file N\-Dvalue.\-cc.
+
+\hypertarget{class_n_d___value_afe3a3a13b45142f1413d2fe2de4951d1}{\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}!$\sim$\-N\-D\-\_\-\-Value@{$\sim$\-N\-D\-\_\-\-Value}}
+\index{$\sim$\-N\-D\-\_\-\-Value@{$\sim$\-N\-D\-\_\-\-Value}!ND_Value@{N\-D\-\_\-\-Value}}
+\subsubsection[{$\sim$\-N\-D\-\_\-\-Value}]{\setlength{\rightskip}{0pt plus 5cm}N\-D\-\_\-\-Value\-::$\sim$\-N\-D\-\_\-\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_n_d___value_afe3a3a13b45142f1413d2fe2de4951d1}
+
+
+Definition at line 8 of file N\-Dvalue.\-cc.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_n_d___value_a83fbc37518fd13b38059a47c422e9024}{\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}!Clone@{Clone}}
+\index{Clone@{Clone}!ND_Value@{N\-D\-\_\-\-Value}}
+\subsubsection[{Clone}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf N\-D\-\_\-\-Value}$\ast$ N\-D\-\_\-\-Value\-::\-Clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_n_d___value_a83fbc37518fd13b38059a47c422e9024}
+
+
+Implemented in \hyperlink{class_n_d___id_value_adc3e53144381e763eb84e8f6d2dcf3e9}{N\-D\-\_\-\-Id\-Value}, \hyperlink{class_n_d___int32_value_ae8fc6254509ce906a191e45c06f49658}{N\-D\-\_\-\-Int32\-Value}, \hyperlink{class_n_d___byte_array_value_ad61295c86a009f7c94b91a906cc6b36a}{N\-D\-\_\-\-Byte\-Array\-Value}, \hyperlink{class_n_d___list_value_a3c42817a587145b39fbf58f0b5f7fb4a}{N\-D\-\_\-\-List\-Value}, \hyperlink{class_n_d___real_value_abc7419df3508e45041a90b981e214956}{N\-D\-\_\-\-Real\-Value}, \hyperlink{class_n_d___bool_value_a26fb17aea42dc9d9edf52a783988e4cd}{N\-D\-\_\-\-Bool\-Value}, \hyperlink{class_n_d___str_value_aeb136b399c70bf7efde0a2029db2d3e0}{N\-D\-\_\-\-Str\-Value}, and \hyperlink{class_n_d___nil_value_ac1dbd47c649bb96ece401b6047880603}{N\-D\-\_\-\-Nil\-Value}.
+
+\hypertarget{class_n_d___value_a7b6432defc1b1cada5a31b5c16d29ac6}{\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}!Equals@{Equals}}
+\index{Equals@{Equals}!ND_Value@{N\-D\-\_\-\-Value}}
+\subsubsection[{Equals}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool N\-D\-\_\-\-Value\-::\-Equals (
+\begin{DoxyParamCaption}
+\item[{const {\bf N\-D\-\_\-\-Value} $\ast$}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_n_d___value_a7b6432defc1b1cada5a31b5c16d29ac6}
+
+
+Implemented in \hyperlink{class_n_d___id_value_aa84829bbfe9842c08a9d011009bf6ad3}{N\-D\-\_\-\-Id\-Value}, \hyperlink{class_n_d___int32_value_af66a16bf770c3fd847d4af6c624b1860}{N\-D\-\_\-\-Int32\-Value}, \hyperlink{class_n_d___byte_array_value_a0989cb51cb2e0d576a2d6e6e78e561cb}{N\-D\-\_\-\-Byte\-Array\-Value}, \hyperlink{class_n_d___list_value_ad1c1105cd71f6e074c75780b57aa0bdb}{N\-D\-\_\-\-List\-Value}, \hyperlink{class_n_d___real_value_a1550861f2a4accacc074dfb0dde3b190}{N\-D\-\_\-\-Real\-Value}, \hyperlink{class_n_d___bool_value_ab4bc7add32f7de0628eaf8ab2dbd1df6}{N\-D\-\_\-\-Bool\-Value}, \hyperlink{class_n_d___str_value_a9096679205abd233f412babb02d3c18b}{N\-D\-\_\-\-Str\-Value}, and \hyperlink{class_n_d___nil_value_aba3e3ddeb95b3edca6c068d6b47b338f}{N\-D\-\_\-\-Nil\-Value}.
+
+\hypertarget{class_n_d___value_aa3e290edb140d8676bfe0316c947502d}{\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}!Eval@{Eval}}
+\index{Eval@{Eval}!ND_Value@{N\-D\-\_\-\-Value}}
+\subsubsection[{Eval}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf N\-D\-\_\-\-Value}$\ast$ N\-D\-\_\-\-Value\-::\-Eval (
+\begin{DoxyParamCaption}
+\item[{{\bf Ndlog\-\_\-\-Operator}}]{op, }
+\item[{{\bf N\-D\-\_\-\-Value} $\ast$}]{rhs = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_n_d___value_aa3e290edb140d8676bfe0316c947502d}
+
+
+Implemented in \hyperlink{class_n_d___id_value_ade36f0cd7fcb88af1e0e1794d3f4afea}{N\-D\-\_\-\-Id\-Value}, \hyperlink{class_n_d___int32_value_a4a16725cc0cd2bc1228572c378e70847}{N\-D\-\_\-\-Int32\-Value}, \hyperlink{class_n_d___byte_array_value_af5456134d6f0cf16a2d3fb1cbcd0069d}{N\-D\-\_\-\-Byte\-Array\-Value}, \hyperlink{class_n_d___list_value_a38730f35b7d9fb26738294116c2e8b50}{N\-D\-\_\-\-List\-Value}, \hyperlink{class_n_d___real_value_aa75f47beb70ca67811a8a00b65409834}{N\-D\-\_\-\-Real\-Value}, \hyperlink{class_n_d___bool_value_af9abb536e2843bb842ba99ce3c6bcd78}{N\-D\-\_\-\-Bool\-Value}, \hyperlink{class_n_d___str_value_abb603d9a1fbf618e578d921d15119b52}{N\-D\-\_\-\-Str\-Value}, and \hyperlink{class_n_d___nil_value_ae64e5bf09008a69dc2057e2477957cad}{N\-D\-\_\-\-Nil\-Value}.
+
+\hypertarget{class_n_d___value_a259c3f918c7fedd9d438bec96f15911a}{\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}!Get\-Type@{Get\-Type}}
+\index{Get\-Type@{Get\-Type}!ND_Value@{N\-D\-\_\-\-Value}}
+\subsubsection[{Get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\-D\-Value\-Type\-Id} N\-D\-\_\-\-Value\-::\-Get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_n_d___value_a259c3f918c7fedd9d438bec96f15911a}
+
+
+Definition at line 13 of file N\-Dvalue.\-cc.
+
+\hypertarget{class_n_d___value_a2c4d333803c5cd8d1f0f6cc274c85151}{\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}!Get\-Type\-Name@{Get\-Type\-Name}}
+\index{Get\-Type\-Name@{Get\-Type\-Name}!ND_Value@{N\-D\-\_\-\-Value}}
+\subsubsection[{Get\-Type\-Name}]{\setlength{\rightskip}{0pt plus 5cm}string N\-D\-\_\-\-Value\-::\-Get\-Type\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_n_d___value_a2c4d333803c5cd8d1f0f6cc274c85151}
+
+
+Definition at line 19 of file N\-Dvalue.\-cc.
+
+\hypertarget{class_n_d___value_a7660a0e6c07a198410fc05725d903219}{\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}!To\-String@{To\-String}}
+\index{To\-String@{To\-String}!ND_Value@{N\-D\-\_\-\-Value}}
+\subsubsection[{To\-String}]{\setlength{\rightskip}{0pt plus 5cm}virtual string N\-D\-\_\-\-Value\-::\-To\-String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_n_d___value_a7660a0e6c07a198410fc05725d903219}
+
+
+Implemented in \hyperlink{class_n_d___id_value_a98248b82fef11b5ffe11aa20f7af2827}{N\-D\-\_\-\-Id\-Value}, \hyperlink{class_n_d___int32_value_a897c234f7b6f00843c2d9d103956b2ae}{N\-D\-\_\-\-Int32\-Value}, \hyperlink{class_n_d___list_value_a780732e62252f946dd96da074dd932b9}{N\-D\-\_\-\-List\-Value}, \hyperlink{class_n_d___byte_array_value_a38fcb45e48d627e00d135c070e3188e5}{N\-D\-\_\-\-Byte\-Array\-Value}, \hyperlink{class_n_d___real_value_ac6103005ec7fa351ff61a2959dcf06b2}{N\-D\-\_\-\-Real\-Value}, \hyperlink{class_n_d___bool_value_af71a39b64021f7e48a1b91752409302b}{N\-D\-\_\-\-Bool\-Value}, \hyperlink{class_n_d___str_value_a48e3142b60cf2e9298b3eb1eb2849a33}{N\-D\-\_\-\-Str\-Value}, and \hyperlink{class_n_d___nil_value_a08f36ab365257992ad4c3cb8a0469106}{N\-D\-\_\-\-Nil\-Value}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_n_d___value_ad6a23ab31aafc1e12b829d66f910131c}{\index{N\-D\-\_\-\-Value@{N\-D\-\_\-\-Value}!m\-\_\-type@{m\-\_\-type}}
+\index{m\-\_\-type@{m\-\_\-type}!ND_Value@{N\-D\-\_\-\-Value}}
+\subsubsection[{m\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\-D\-Value\-Type\-Id} N\-D\-\_\-\-Value\-::m\-\_\-type\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_n_d___value_ad6a23ab31aafc1e12b829d66f910131c}
+
+
+Definition at line 56 of file N\-Dvalue.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/msus/ndlog/value/\hyperlink{_n_dvalue_8h}{N\-Dvalue.\-h}\item 
+src/msus/ndlog/\hyperlink{_n_dvalue_8cc}{N\-Dvalue.\-cc}\end{DoxyCompactItemize}

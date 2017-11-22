@@ -1,0 +1,111 @@
+\hypertarget{timing_8h}{\section{src/msus/ndlog/timing.h File Reference}
+\label{timing_8h}\index{src/msus/ndlog/timing.\-h@{src/msus/ndlog/timing.\-h}}
+}
+{\ttfamily \#include $<$pthread.\-h$>$}\\*
+{\ttfamily \#include $<$sys/time.\-h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{timing_8h_a5a123b382640b3aa65dd5db386002fbc}{A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-Y\-E\-L\-L\-O\-W}~\char`\"{}\textbackslash{}x1b\mbox{[}33m\char`\"{}
+\item 
+\#define \hyperlink{timing_8h_a92a364c2b863dde1a024a77eac2a5b3b}{A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-R\-E\-S\-E\-T}~\char`\"{}\textbackslash{}x1b\mbox{[}0m\char`\"{}
+\item 
+\#define \hyperlink{timing_8h_a31f99d9c502b52b5f36dc7e2028c2e80}{B\-I\-L\-L\-I\-O\-N}~1000000000\-L
+\item 
+\#define \hyperlink{timing_8h_a9567e3c6e7347c6a7e6a8a5811ebeabd}{T\-I\-M\-I\-N\-G\-\_\-\-S\-A\-M\-P\-L\-E}~5000
+\item 
+\#define \hyperlink{timing_8h_a3461160c855b8f9ea54b0162c3629f09}{log\-\_\-time}(fmt,...)
+\item 
+\#define \hyperlink{timing_8h_a8cfe47a626c35a858e809a41829a2cd4}{S\-T\-A\-R\-T\-\_\-\-T\-I\-M\-E}
+\item 
+\#define \hyperlink{timing_8h_a724f04b3c380f09239db0ef7cc6260af}{E\-N\-D\-\_\-\-T\-I\-M\-E}(x)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{timing_8h_a92a364c2b863dde1a024a77eac2a5b3b}{\index{timing.\-h@{timing.\-h}!A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-R\-E\-S\-E\-T@{A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-R\-E\-S\-E\-T}}
+\index{A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-R\-E\-S\-E\-T@{A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-R\-E\-S\-E\-T}!timing.h@{timing.\-h}}
+\subsubsection[{A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-R\-E\-S\-E\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-R\-E\-S\-E\-T~\char`\"{}\textbackslash{}x1b\mbox{[}0m\char`\"{}}}\label{timing_8h_a92a364c2b863dde1a024a77eac2a5b3b}
+
+
+Definition at line 8 of file timing.\-h.
+
+\hypertarget{timing_8h_a5a123b382640b3aa65dd5db386002fbc}{\index{timing.\-h@{timing.\-h}!A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-Y\-E\-L\-L\-O\-W@{A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-Y\-E\-L\-L\-O\-W}}
+\index{A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-Y\-E\-L\-L\-O\-W@{A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-Y\-E\-L\-L\-O\-W}!timing.h@{timing.\-h}}
+\subsubsection[{A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-Y\-E\-L\-L\-O\-W}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\-N\-S\-I\-\_\-\-C\-O\-L\-O\-R\-\_\-\-Y\-E\-L\-L\-O\-W~\char`\"{}\textbackslash{}x1b\mbox{[}33m\char`\"{}}}\label{timing_8h_a5a123b382640b3aa65dd5db386002fbc}
+
+
+Definition at line 7 of file timing.\-h.
+
+\hypertarget{timing_8h_a31f99d9c502b52b5f36dc7e2028c2e80}{\index{timing.\-h@{timing.\-h}!B\-I\-L\-L\-I\-O\-N@{B\-I\-L\-L\-I\-O\-N}}
+\index{B\-I\-L\-L\-I\-O\-N@{B\-I\-L\-L\-I\-O\-N}!timing.h@{timing.\-h}}
+\subsubsection[{B\-I\-L\-L\-I\-O\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-I\-L\-L\-I\-O\-N~1000000000\-L}}\label{timing_8h_a31f99d9c502b52b5f36dc7e2028c2e80}
+
+
+Definition at line 10 of file timing.\-h.
+
+\hypertarget{timing_8h_a724f04b3c380f09239db0ef7cc6260af}{\index{timing.\-h@{timing.\-h}!E\-N\-D\-\_\-\-T\-I\-M\-E@{E\-N\-D\-\_\-\-T\-I\-M\-E}}
+\index{E\-N\-D\-\_\-\-T\-I\-M\-E@{E\-N\-D\-\_\-\-T\-I\-M\-E}!timing.h@{timing.\-h}}
+\subsubsection[{E\-N\-D\-\_\-\-T\-I\-M\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-N\-D\-\_\-\-T\-I\-M\-E(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)}}\label{timing_8h_a724f04b3c380f09239db0ef7cc6260af}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+\textcolor{keyword}{struct }timespec tend; \(\backslash\)
+    clock\_gettime(CLOCK\_REALTIME, &tend); \(\backslash\)
+    diff = \hyperlink{timing_8h_a31f99d9c502b52b5f36dc7e2028c2e80}{BILLION} * (tend.tv\_sec - tstart.tv\_sec) + tend.tv\_nsec - tstart.tv\_nsec; \(\backslash\)
+    stack\_tick\_time\_dedos\_avg = (stack\_tick\_time\_dedos\_avg * count) + (diff); \(\backslash\)
+    count++; \(\backslash\)
+    stack\_tick\_time\_dedos\_avg /= (count); \(\backslash\)
+    if(count % \hyperlink{timing_8h_a9567e3c6e7347c6a7e6a8a5811ebeabd}{TIMING\_SAMPLE} == 0)\{ \hyperlink{timing_8h_a3461160c855b8f9ea54b0162c3629f09}{\(\backslash\)}
+\hyperlink{timing_8h_a3461160c855b8f9ea54b0162c3629f09}{        log\_time}(\textcolor{stringliteral}{"%s avg for N = %llu: %llu nanosec"},x, count, stack\_tick\_time\_dedos\_avg); 
+      \(\backslash\)
+        stack\_tick\_time\_dedos\_avg = 0; \(\backslash\)
+        count = 0; \(\backslash\)
+    \} \(\backslash\)
+\end{DoxyCode}
+
+
+Definition at line 25 of file timing.\-h.
+
+\hypertarget{timing_8h_a3461160c855b8f9ea54b0162c3629f09}{\index{timing.\-h@{timing.\-h}!log\-\_\-time@{log\-\_\-time}}
+\index{log\-\_\-time@{log\-\_\-time}!timing.h@{timing.\-h}}
+\subsubsection[{log\-\_\-time}]{\setlength{\rightskip}{0pt plus 5cm}\#define log\-\_\-time(
+\begin{DoxyParamCaption}
+\item[{}]{fmt, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}}\label{timing_8h_a3461160c855b8f9ea54b0162c3629f09}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{do} \{ fprintf(stderr, \textcolor{stringliteral}{""} \hyperlink{timing_8h_a5a123b382640b3aa65dd5db386002fbc}{ANSI\_COLOR\_YELLOW}  \textcolor{stringliteral}{"%lu:%d:%s(): "} fmt, pthread\_self(), \(\backslash\)
+                                \_\_LINE\_\_, \_\_func\_\_, \_\_VA\_ARGS\_\_); \(\backslash\)
+                              fprintf(stderr, \hyperlink{timing_8h_a92a364c2b863dde1a024a77eac2a5b3b}{ANSI\_COLOR\_RESET} \textcolor{stringliteral}{"\(\backslash\)n"}); \} \textcolor{keywordflow}{while} (0)
+\end{DoxyCode}
+
+
+Definition at line 14 of file timing.\-h.
+
+\hypertarget{timing_8h_a8cfe47a626c35a858e809a41829a2cd4}{\index{timing.\-h@{timing.\-h}!S\-T\-A\-R\-T\-\_\-\-T\-I\-M\-E@{S\-T\-A\-R\-T\-\_\-\-T\-I\-M\-E}}
+\index{S\-T\-A\-R\-T\-\_\-\-T\-I\-M\-E@{S\-T\-A\-R\-T\-\_\-\-T\-I\-M\-E}!timing.h@{timing.\-h}}
+\subsubsection[{S\-T\-A\-R\-T\-\_\-\-T\-I\-M\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-R\-T\-\_\-\-T\-I\-M\-E}}\label{timing_8h_a8cfe47a626c35a858e809a41829a2cd4}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+\textcolor{keyword}{static} uint64\_t stack\_tick\_time\_dedos\_avg = 0, diff = 0; \(\backslash\)
+    static uint64\_t count = 0; \(\backslash\)
+    struct timespec tstart; \(\backslash\)
+    clock\_gettime(CLOCK\_REALTIME, &tstart);
+\end{DoxyCode}
+
+
+Definition at line 19 of file timing.\-h.
+
+\hypertarget{timing_8h_a9567e3c6e7347c6a7e6a8a5811ebeabd}{\index{timing.\-h@{timing.\-h}!T\-I\-M\-I\-N\-G\-\_\-\-S\-A\-M\-P\-L\-E@{T\-I\-M\-I\-N\-G\-\_\-\-S\-A\-M\-P\-L\-E}}
+\index{T\-I\-M\-I\-N\-G\-\_\-\-S\-A\-M\-P\-L\-E@{T\-I\-M\-I\-N\-G\-\_\-\-S\-A\-M\-P\-L\-E}!timing.h@{timing.\-h}}
+\subsubsection[{T\-I\-M\-I\-N\-G\-\_\-\-S\-A\-M\-P\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-I\-M\-I\-N\-G\-\_\-\-S\-A\-M\-P\-L\-E~5000}}\label{timing_8h_a9567e3c6e7347c6a7e6a8a5811ebeabd}
+
+
+Definition at line 12 of file timing.\-h.
+

@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - runtime/routing_strategies.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">runtime</a> - routing_strategies.c<span style="font-size: 80%;"> (source / <a href="routing_strategies.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">44</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-11-22</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /**</a>
+<span class="lineNum">       2 </span>            :  * @file routing_strategies.c
+<span class="lineNum">       3 </span>            :  * Defines strategies that MSUs can use for routing to endpoints
+<span class="lineNum">       4 </span>            :  */
+<span class="lineNum">       5 </span>            : #include &quot;routing_strategies.h&quot;
+<span class="lineNum">       6 </span>            : #include &quot;local_msu.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;logging.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;msu_message.h&quot;
+<a name="9"><span class="lineNum">       9 </span>            : </a>
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span><span class="lineNoCov">          0 : int default_routing(struct msu_type *type, struct local_msu *sender,</span>
+<span class="lineNum">      12 </span>            :                     struct msu_msg *msg, struct msu_endpoint *output) {
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineNoCov">          0 :     struct routing_table *table = get_type_from_route_set(&amp;sender-&gt;routes, type-&gt;id);</span>
+<span class="lineNum">      15 </span><span class="lineNoCov">          0 :     if (table == NULL) {</span>
+<span class="lineNum">      16 </span><span class="lineNoCov">          0 :         log_error(&quot;No routes available from msu %d to type %d&quot;,</span>
+<span class="lineNum">      17 </span>            :                   sender-&gt;id, type-&gt;id);
+<span class="lineNum">      18 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      19 </span>            :     }
+<span class="lineNum">      20 </span><span class="lineNoCov">          0 :     int rtn = get_route_endpoint(table, msg-&gt;hdr.key.id, output);</span>
+<span class="lineNum">      21 </span><span class="lineNoCov">          0 :     if (rtn &lt; 0) {</span>
+<span class="lineNum">      22 </span><span class="lineNoCov">          0 :         log_error(&quot;Error getting endpoint from msu %d&quot;, sender-&gt;id);</span>
+<span class="lineNum">      23 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      24 </span>            :     }
+<a name="25"><span class="lineNum">      25 </span><span class="lineNoCov">          0 :     return 0;</span></a>
+<span class="lineNum">      26 </span>            : }
+<span class="lineNum">      27 </span><span class="lineNoCov">          0 : int shortest_queue_route(struct msu_type *type, struct local_msu *sender,</span>
+<span class="lineNum">      28 </span>            :                          struct msu_msg *msg, struct msu_endpoint *output) {
+<span class="lineNum">      29 </span><span class="lineNoCov">          0 :     struct routing_table *table = get_type_from_route_set(&amp;sender-&gt;routes, type-&gt;id);</span>
+<span class="lineNum">      30 </span><span class="lineNoCov">          0 :     if (table == NULL) {</span>
+<span class="lineNum">      31 </span><span class="lineNoCov">          0 :         log_error(&quot;No routes available from msu %d to type %d&quot;,</span>
+<span class="lineNum">      32 </span>            :                   sender-&gt;id, type-&gt;id);
+<span class="lineNum">      33 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      34 </span>            :     }
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :     int rtn = get_shortest_queue_endpoint(table, msg-&gt;hdr.key.id, output);</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :     if (rtn &lt; 0) {</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :         log_error(&quot;Error getting shortest queue endpoint from msu %d&quot;, sender-&gt;id);</span>
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      39 </span>            :     }
+<a name="40"><span class="lineNum">      40 </span><span class="lineNoCov">          0 :     return 0;</span></a>
+<span class="lineNum">      41 </span>            : }
+<span class="lineNum">      42 </span><span class="lineNoCov">          0 : int route_to_id(struct msu_type *type, struct local_msu *sender, int msu_id,</span>
+<span class="lineNum">      43 </span>            :                 struct msu_endpoint *output) {
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :     struct routing_table *table = get_type_from_route_set(&amp;sender-&gt;routes, type-&gt;id);</span>
+<span class="lineNum">      45 </span><span class="lineNoCov">          0 :     if (table == NULL) {</span>
+<span class="lineNum">      46 </span><span class="lineNoCov">          0 :         log_error(&quot;No routes available from msu %d to type %d&quot;,</span>
+<span class="lineNum">      47 </span>            :                   sender-&gt;id, type-&gt;id);
+<span class="lineNum">      48 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      49 </span>            :     }
+<span class="lineNum">      50 </span><span class="lineNoCov">          0 :     int rtn = get_endpoint_by_id(table, msu_id, output);</span>
+<span class="lineNum">      51 </span><span class="lineNoCov">          0 :     if (rtn &lt; 0) {</span>
+<span class="lineNum">      52 </span><span class="lineNoCov">          0 :         log_error(&quot;Error getting endpoint with ID %d from msu %d&quot;, msu_id, sender-&gt;id);</span>
+<span class="lineNum">      53 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      54 </span>            :     }
+<a name="55"><span class="lineNum">      55 </span><span class="lineNoCov">          0 :     return 0;</span></a>
+<span class="lineNum">      56 </span>            : }
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 : int route_to_origin_runtime(struct msu_type *type, struct local_msu *sender, struct msu_msg *msg,</span>
+<span class="lineNum">      58 </span>            :                             struct msu_endpoint *output) {
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :     uint32_t runtime_id = msg-&gt;hdr.provinance.origin.runtime_id;</span>
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span><span class="lineNoCov">          0 :     struct routing_table *table = get_type_from_route_set(&amp;sender-&gt;routes, type-&gt;id);</span>
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :     if (table == NULL) {</span>
+<span class="lineNum">      64 </span><span class="lineNoCov">          0 :          log_error(&quot;No routes available from msu %d to type %d&quot;,</span>
+<span class="lineNum">      65 </span>            :                   sender-&gt;id, type-&gt;id);
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      67 </span>            :     }
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :     int n_endpoints = get_n_endpoints(table);</span>
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 :     struct msu_endpoint eps[n_endpoints];</span>
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span><span class="lineNoCov">          0 :     int n_rt_endpoints = get_endpoints_by_runtime_id(table, runtime_id, eps, n_endpoints);</span>
+<span class="lineNum">      73 </span><span class="lineNoCov">          0 :     if (n_rt_endpoints &lt;= 0) {</span>
+<span class="lineNum">      74 </span><span class="lineNoCov">          0 :         log_error(&quot;Could not get endpoint with runtime id %d&quot;, runtime_id);</span>
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      76 </span>            :     }
+<span class="lineNum">      77 </span>            : 
+<span class="lineNum">      78 </span>            :     log(LOG_ROUTING_DECISIONS, &quot;Sending to one of %d endpoints with correct runtime&quot;,
+<span class="lineNum">      79 </span>            :         n_rt_endpoints);
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :     *output = eps[((unsigned int)msg-&gt;hdr.key.id) % n_rt_endpoints];</span>
+<span class="lineNum">      81 </span>            :     log(LOG_ROUTING_DECISIONS, &quot;Chose endpoint %d (idx: %d)&quot;,
+<span class="lineNum">      82 </span>            :         output-&gt;id, ((unsigned int)msg-&gt;hdr.key.id) % n_rt_endpoints);
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :     return 0;</span>
+<span class="lineNum">      84 </span>            : }
+<span class="lineNum">      85 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

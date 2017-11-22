@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - unnamed - runtime/msu_type.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">runtime</a> - msu_type.c<span style="font-size: 80%;"> (source / <a href="msu_type.c.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">unnamed</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">30</td>
+            <td class="headerCovTableEntry">45</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-11-22</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryMed">83.3 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /**</a>
+<span class="lineNum">       2 </span>            :  * @file msu_type.c
+<span class="lineNum">       3 </span>            :  *
+<span class="lineNum">       4 </span>            :  * Registration and location of msu types
+<span class="lineNum">       5 </span>            :  */
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : #include &quot;dfg.h&quot;
+<span class="lineNum">       8 </span>            : #include &quot;msu_type.h&quot;
+<span class="lineNum">       9 </span>            : #include &quot;logging.h&quot;
+<span class="lineNum">      10 </span>            : #include &quot;msu_type_list.h&quot;
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : /**
+<span class="lineNum">      13 </span>            :  * MOVEME: MAX_TYPE_ID
+<span class="lineNum">      14 </span>            :  * This is the maximum ID that can be assigned to an MSU type
+<span class="lineNum">      15 </span>            :  */
+<span class="lineNum">      16 </span>            : #define MAX_TYPE_ID 1000
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span>            : /**
+<span class="lineNum">      19 </span>            :  * Every MSU type that can be used. Defined in `msu_type_list.h`,
+<span class="lineNum">      20 </span>            :  * or overridden from previous definition
+<span class="lineNum">      21 </span>            :  */
+<span class="lineNum">      22 </span>            : static struct msu_type *DEFINED_MSU_TYPES[] = MSU_TYPE_LIST;
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span>            : /**
+<span class="lineNum">      25 </span>            :  * The number of available MSU types
+<span class="lineNum">      26 </span>            :  */
+<span class="lineNum">      27 </span>            : #define N_MSU_TYPES (sizeof(DEFINED_MSU_TYPES) / sizeof(struct msu_type*))
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span>            : /**
+<span class="lineNum">      30 </span>            :  * Pointers to MSU Types, indexed by ID
+<span class="lineNum">      31 </span>            :  */
+<span class="lineNum">      32 </span>            : static struct msu_type *msu_types[MAX_TYPE_ID];
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            : /**
+<span class="lineNum">      35 </span>            :  * Regsiters an MSU type so that it can be later referenced by its ID
+<span class="lineNum">      36 </span>            :  * @param type MSU Type to be registered
+<a name="37"><span class="lineNum">      37 </span>            :  * @return 0 on success, -1 on error</a>
+<span class="lineNum">      38 </span>            :  */
+<span class="lineNum">      39 </span><span class="lineCov">          8 : static int register_msu_type(struct msu_type *type) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">          8 :     if (type-&gt;id &gt; MAX_TYPE_ID) {</span>
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :         log_error(&quot;MSU type %s not registered. Type ID %d too high. Max: %d&quot;,</span>
+<span class="lineNum">      42 </span>            :                   type-&gt;name, type-&gt;id, MAX_TYPE_ID);
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">      44 </span>            :     }
+<span class="lineNum">      45 </span><span class="lineCov">          8 :     msu_types[type-&gt;id] = type;</span>
+<span class="lineNum">      46 </span><span class="lineCov">          8 :     log(LOG_MSU_TYPE_INIT, &quot;Registered MSU type %s&quot;, type-&gt;name);</span>
+<span class="lineNum">      47 </span><span class="lineCov">          8 :     return 0;</span>
+<a name="48"><span class="lineNum">      48 </span>            : }</a>
+<span class="lineNum">      49 </span>            : 
+<span class="lineNum">      50 </span><span class="lineNoCov">          0 : void destroy_msu_types() {</span>
+<span class="lineNum">      51 </span><span class="lineNoCov">          0 :     for (int i=0; i &lt; N_MSU_TYPES; i++) {</span>
+<span class="lineNum">      52 </span><span class="lineNoCov">          0 :         struct msu_type *type = DEFINED_MSU_TYPES[i];</span>
+<span class="lineNum">      53 </span><span class="lineNoCov">          0 :         if (msu_types[type-&gt;id] != NULL) {</span>
+<span class="lineNum">      54 </span><span class="lineNoCov">          0 :             if (msu_types[type-&gt;id]-&gt;destroy_type != NULL) {</span>
+<span class="lineNum">      55 </span><span class="lineNoCov">          0 :                 msu_types[type-&gt;id]-&gt;destroy_type(type);</span>
+<span class="lineNum">      56 </span>            :             }
+<span class="lineNum">      57 </span>            :         }
+<span class="lineNum">      58 </span>            :     }
+<a name="59"><span class="lineNum">      59 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      60 </span>            : 
+<span class="lineNum">      61 </span><span class="lineCov">          2 : struct msu_type *get_msu_type(int id) {</span>
+<span class="lineNum">      62 </span><span class="lineCov">          2 :     if (id &gt; MAX_TYPE_ID) {</span>
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :         log_error(&quot;MSU type %d cannot be found Type ID too high. Max: %d&quot;,</span>
+<span class="lineNum">      64 </span>            :                   id, MAX_TYPE_ID);
+<span class="lineNum">      65 </span><span class="lineNoCov">          0 :         return NULL;</span>
+<span class="lineNum">      66 </span>            :     }
+<span class="lineNum">      67 </span><span class="lineCov">          2 :     return msu_types[id];</span>
+<span class="lineNum">      68 </span>            : }
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span>            : /**
+<span class="lineNum">      71 </span>            :  * Checks whether the msu type has the required fields to be used.
+<span class="lineNum">      72 </span>            :  * (At the moment, the only required field is `receive`)
+<a name="73"><span class="lineNum">      73 </span>            :  * @return true/false</a>
+<span class="lineNum">      74 </span>            :  */
+<span class="lineNum">      75 </span><span class="lineCov">         11 : static bool has_required_fields(struct msu_type *type) {</span>
+<span class="lineNum">      76 </span><span class="lineCov">         11 :     if (type-&gt;receive == NULL) {</span>
+<span class="lineNum">      77 </span><span class="lineCov">          2 :         log_error(&quot;MSU type %s does not register a recieve function&quot;,</span>
+<span class="lineNum">      78 </span>            :                   type-&gt;name);
+<span class="lineNum">      79 </span><span class="lineCov">          2 :         return false;</span>
+<span class="lineNum">      80 </span>            :     }
+<span class="lineNum">      81 </span><span class="lineCov">          9 :     return true;</span>
+<span class="lineNum">      82 </span>            : }
+<span class="lineNum">      83 </span>            : 
+<span class="lineNum">      84 </span>            : /**
+<span class="lineNum">      85 </span>            :  * Initializes a specific MSU type, calling its init function
+<span class="lineNum">      86 </span>            :  * and registering it for future calls
+<span class="lineNum">      87 </span>            :  * @param type The type of MSU to be registered
+<a name="88"><span class="lineNum">      88 </span>            :  * @return 0 on success, -1 on error</a>
+<span class="lineNum">      89 </span>            :  */
+<span class="lineNum">      90 </span><span class="lineCov">          8 : static int init_msu_type(struct msu_type *type) {</span>
+<span class="lineNum">      91 </span><span class="lineCov">          8 :     if (!has_required_fields(type)) {</span>
+<span class="lineNum">      92 </span><span class="lineCov">          1 :         log_error(&quot;Not registering MSU type %s due to missing fields&quot;,</span>
+<span class="lineNum">      93 </span>            :                   type-&gt;name);
+<span class="lineNum">      94 </span><span class="lineCov">          1 :         return -1;</span>
+<span class="lineNum">      95 </span>            :     }
+<span class="lineNum">      96 </span><span class="lineCov">          7 :     if (type-&gt;init_type) {</span>
+<span class="lineNum">      97 </span><span class="lineCov">          2 :         if (type-&gt;init_type(type) != 0) {</span>
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :             log_error(&quot;MSU Type %s not initialized: failed custom constructor&quot;,</span>
+<span class="lineNum">      99 </span>            :                       type-&gt;name);
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :             return -1;</span>
+<span class="lineNum">     101 </span>            :         } else {
+<span class="lineNum">     102 </span><span class="lineCov">          2 :             log(LOG_MSU_TYPE_INIT, &quot;Initialized msu type %s&quot;, type-&gt;name);</span>
+<span class="lineNum">     103 </span>            :         }
+<span class="lineNum">     104 </span>            :     }
+<span class="lineNum">     105 </span><span class="lineCov">          7 :     if (register_msu_type(type) != 0) {</span>
+<span class="lineNum">     106 </span><span class="lineNoCov">          0 :         log_error(&quot;MSU type %s not registered&quot;, type-&gt;name);</span>
+<span class="lineNum">     107 </span><span class="lineNoCov">          0 :         return -1;</span>
+<span class="lineNum">     108 </span>            :     }
+<span class="lineNum">     109 </span><span class="lineCov">          7 :     return 0;</span>
+<span class="lineNum">     110 </span>            : }
+<a name="111"><span class="lineNum">     111 </span>            : </a>
+<span class="lineNum">     112 </span>            : 
+<span class="lineNum">     113 </span><span class="lineCov">          7 : int init_msu_type_id(unsigned int type_id) {</span>
+<span class="lineNum">     114 </span><span class="lineCov">          7 :     log(TEST, &quot;Number of MSU types: %d&quot;, (int)N_MSU_TYPES);</span>
+<span class="lineNum">     115 </span><span class="lineCov">         13 :     for (int i=0; i&lt;N_MSU_TYPES; i++) {</span>
+<span class="lineNum">     116 </span><span class="lineCov">         12 :         struct msu_type *type = DEFINED_MSU_TYPES[i];</span>
+<span class="lineNum">     117 </span><span class="lineCov">         12 :         if (type-&gt;id == type_id) {</span>
+<span class="lineNum">     118 </span><span class="lineCov">          6 :             return init_msu_type(type);</span>
+<span class="lineNum">     119 </span>            :         }
+<span class="lineNum">     120 </span>            :     }
+<span class="lineNum">     121 </span><span class="lineCov">          1 :     log_error(&quot;MSU Type ID %u not found!&quot;, type_id);</span>
+<span class="lineNum">     122 </span><span class="lineCov">          1 :     return -1;</span>
+<span class="lineNum">     123 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
